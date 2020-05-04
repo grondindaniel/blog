@@ -6,7 +6,7 @@
  * for separate controller and method
  *
  */
-
+namespace Acme;
 class Router
 {
     /*
@@ -32,7 +32,10 @@ class Router
                     call_user_func([$controller,$method],array_values($url));
                 }
             }
-
+        }
+        else
+        {
+            echo "home page";
         }
     }
 

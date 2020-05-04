@@ -8,11 +8,13 @@
             "email": "daniel.grondin@ac-nantes.fr"
         }
     ],
-    "require": {},
+    "require": {
+        "twig/twig": "^3.0"
+    },
 
     "autoload": {
-        "PSR-4": {
-            "Acme": "app/config"
+        "psr-4": {
+            "Acme\\": "app/config/"
         }
     }
 }
