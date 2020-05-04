@@ -10211,3 +10211,14 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+.page{
+  position: relative;
+  margin-top: 150px;
+}
+.footer_bottom{
+  position: relative;
+  bottom: 0px;
+  top : 10px;
+  width: 100%;
+
+}

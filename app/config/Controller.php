@@ -16,7 +16,7 @@ class Controller
     public function model($model)
     {
         require_once 'app/models/'.$model.'.php';
-        return $model();
+        return new $model();
     }
 
 
@@ -27,6 +27,7 @@ class Controller
     {
         $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
         $loader->addPath('public/dist/css/','css');
+        $loader->addPath('vendor/', 'vendor');
         $twig = new \Twig\Environment($loader, []);
         return $twig;
     }
