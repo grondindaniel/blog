@@ -1,0 +1,18 @@
+{
+    "name": "danielgrondin/blog",
+    "description": "Blog with MVC pattern and TWIG 3",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "grondindaniel",
+            "email": "daniel.grondin@ac-nantes.fr"
+        }
+    ],
+    "require": {},
+
+    "autoload": {
+        "PSR-4": {
+            "Acme": "app/config"
+        }
+    }
+}
