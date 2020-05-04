@@ -7,6 +7,7 @@
  */
 
 namespace Acme;
+use Twig\Extra\String\StringExtension;
 
 class Controller
 {
@@ -29,6 +30,7 @@ class Controller
         $loader->addPath('public/dist/css/','css');
         $loader->addPath('vendor/', 'vendor');
         $twig = new \Twig\Environment($loader, []);
+        $twig->addExtension(new StringExtension());
         return $twig;
     }
 }
