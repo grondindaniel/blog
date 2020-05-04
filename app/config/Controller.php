@@ -26,8 +26,8 @@ class Controller
     public function twig()
     {
         $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
+        $loader->addPath('public/dist/css/','css');
         $twig = new \Twig\Environment($loader, []);
-
-        echo $twig->render('index.html', []);
+        return $twig;
     }
 }

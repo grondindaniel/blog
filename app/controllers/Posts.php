@@ -1,7 +1,7 @@
 <?php
 
 
-class Posts
+class Posts extends Acme\Controller
 {
     public function index()
     {

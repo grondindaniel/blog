@@ -35,7 +35,12 @@ class Router
         }
         else
         {
-            echo "home page";
+            $loader2 = new \Twig\Loader\FilesystemLoader('app/views/templates');
+            $twig = new \Twig\Environment($loader2, []);
+            $loader2->addPath('public/dist/css/','css');
+            $loader2->addPath('public/dist/assets/img/','img');
+            echo $twig->render('home\index.twig', ['name' => 'Fabien']);
+
         }
     }
 
