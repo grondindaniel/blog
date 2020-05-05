@@ -3,7 +3,9 @@
 {% block content %}
 
     {% for post in data %}
-    {{ post.title }}
+        {% autoescape %}
+            <div class="post_tilte"> {{ post.title | raw }} </div>
+        {% endautoescape %}
     {% endfor %}
 
 {% endblock %}
