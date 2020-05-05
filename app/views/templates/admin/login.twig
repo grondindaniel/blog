@@ -1,0 +1,27 @@
+{% extends 'basic_template.twig' %}
+
+
+{% block content %}
+    <div class="formulaire">
+        <form action="../Users/loginCheck" method="post">
+            <input type="text" placeholder="Saisir votre adresse email" name="email" required>
+            <input type="password" placeholder="Saisir mot de passe" name="pwd" required>
+            <button type="submit" style="background-color: #51A691;">Se connecter</button>
+            {% if msg == 'error' %}
+                <div class="alert alert-warning">
+                    <strong>Authentification échouée ! </strong> Identifiant ou mot de passe incorrect.
+                </div>
+            {% endif %}
+            {% if status == 'error' %}
+                <div class="alert alert-warning">
+                    <strong>Votre compte n'est pas encore validé ! </strong> Validation sous 24 heures.
+                </div>
+            {% endif %}
+            {% if suspend == 'true' %}
+                <div class="alert alert-danger">
+                    <strong>Votre compte a été suspendu</strong> Pour plus d'information contactez l'adminsitrateur via le formulaire de contact.
+                </div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}
