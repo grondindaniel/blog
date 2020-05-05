@@ -2,28 +2,60 @@
 
 {% block content %}
 
-    <div class="formulaire2">
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">S'enregistrer</h2>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+    </div>
 
-        <form action="../Users/addUser" method="post" onSubmit="return validate();">
 
-            <input type="text" placeholder="Nom" name="firstname" required>
-            <input type="text" placeholder="Prénom" name="lastname" required>
-            <input type="text" placeholder="Email" name="email" required>
-            <input type="password" placeholder="Saisir un mot de passe" id="pwd" name="pwd" required>
-            <input type="password" placeholder="Confirmer le mot de passe" id="pwd_verif" name="pwd" required>
+    <script>
+        function validate(){
 
-            <button type="submit" style="background-color: #51A691;width: 30%;">S'inscrire</button>
-            <div class="g-recaptcha" data-sitekey="6LeAnC0UAAAAAGB-hJ7RGLu7p1T-llZpN3_x4494"></div>
-        </form>
-        <div id="message">
-            <h3>Le mot de passe devrait contenir :</h3>
-            <p id="letter" class="invalid">Au minimun une <b>minuscule</b> </p>
-            <p id="capital" class="invalid">Au minimun une <b>majuscule</b> </p>
-            <p id="number" class="invalid">Au minimun un <b>chiffre</b></p>
-            <p id="length" class="invalid">Au minimun <b>8 caractères</b></p>
+            var a = document.getElementById("pwd").value;
+            var b = document.getElementById("pwd_verif").value;
+            if (a!=b) {
+                alert("Les mots de passe sont différents");
+                return false;
+            }
+        }
+    </script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    </head>
+    <body>
+
+        <!-- Navigation -->
+
+
+        <div class="formulaire2">
+
+            <form action="../Users/addUser" method="post" onSubmit="return validate();">
+
+                <input type="text" placeholder="Nom" name="firstname" required>
+                <input type="text" placeholder="Prénom" name="lastname" required>
+                <input type="text" placeholder="Email" name="email" required>
+                <input type="password" placeholder="Saisir un mot de passe" id="pwd" name="pwd" required>
+                <input type="password" placeholder="Confirmer le mot de passe" id="pwd_verif" name="pwd" required>
+                <div class="row">
+                    <div class="col-md-4">
+                        <button type="submit" style="background-color: #51A691;width: 30%;">S'inscrire</button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="g-recaptcha" data-sitekey="6LeAnC0UAAAAAGB-hJ7RGLu7p1T-llZpN3_x4494"></div>
+                    </div>
+
+                </div>
+            </form>
+            <div id="message">
+                <h3>Le mot de passe devrait contenir :</h3>
+                <p id="letter" class="invalid">Au minimun une <b>minuscule</b> </p>
+                <p id="capital" class="invalid">Au minimun une <b>majuscule</b> </p>
+                <p id="number" class="invalid">Au minimun un <b>chiffre</b></p>
+                <p id="length" class="invalid">Au minimun <b>8 caractères</b></p>
+            </div>
         </div>
-    </div>
-    </div>
     <script>
         var myInput = document.getElementById("pwd");
         var letter = document.getElementById("letter");
