@@ -10222,3 +10222,117 @@ form .row:first-child .floating-label-form-group {
   width: 100%;
 
 }
+/* form login */
+
+.body_form{
+  width: 100%;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #9053c7;
+  background: -webkit-linear-gradient(-135deg, #19BB9A, #07D3A6);
+  background: -o-linear-gradient(-135deg, #19BB9A, #07D3A6);
+  background: -moz-linear-gradient(-135deg, #19BB9A, #07D3A6);
+  background: linear-gradient(-135deg,#19BB9A, #19BB9A);
+}
+
+.formulaire{
+  width: 40%;
+  height: 320px;
+  margin: auto;
+  position: relative;
+  margin-top: 200px;
+  background-color: white;
+  padding: 10px;
+}
+.formulaire2{
+  width: 40%;
+  height: 380px;
+  margin: auto;
+  position: relative;
+  margin-top: 200px;
+  background-color: white;
+  padding: 10px;
+}
+.form-control{
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+}
+
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  width: 40%;
+  margin: auto;
+}
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* alert login color red */
+.alert-danger {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+}
+
+.alert-warning{
+  padding: 20px;
+  background-color: #FD5B03; /* Orange */
+  color: white;
+  margin-bottom: 15px;
+}
