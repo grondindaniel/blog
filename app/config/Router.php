@@ -54,7 +54,6 @@ class Router
         $url = rtrim($url,'/');
         $url = explode('/', $url);
         return $url;
-        PHP_EOL;
     }
-
 }
+PHP_EOL;
