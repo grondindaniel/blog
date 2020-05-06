@@ -33,7 +33,8 @@ class Users extends Acme\Controller
         $lastname = $_POST['lastname'];
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
-        $data = parent::model('User')->addUser($firstname, $lastname,$email, $pwd);
+        parent::model('User')->addUser($firstname, $lastname,$email, $pwd);
+
     }
 
 
@@ -47,7 +48,7 @@ class Users extends Acme\Controller
         $data = parent::model('User')->chekedAccount($email, $pwd);
         $twig = parent::twig();
         $nbNewUsers = self::nbUsersWaitingForValidation();
-        if($data['valid'] == true && intval($data['role']) == 1)
+        if($data['valid'] === true && intval($data['role']) == 1)
         {
             session_start();
             $_SESSION['level']= 'high';
@@ -56,7 +57,7 @@ class Users extends Acme\Controller
             echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers, 'level'=>$level));
 
         }
-        elseif ($data['valid'] == true && $data['role'] == '2' && intval($data['status']) == 1 && intval($data['suspend'])== 0)
+        elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status']) == 1 && intval($data['suspend'])== 0)
         {
             session_start();
             $_SESSION['level']= 'low';
@@ -64,11 +65,11 @@ class Users extends Acme\Controller
             echo $twig->render('user\home_user.twig', array('level'=>$level));
 
         }
-        elseif ($data['valid'] == false)
+        elseif ($data['valid'] === false)
         {
             echo $twig->render('admin\login.twig', array('msg'=>'error'));
         }
-        elseif ($data['status'] == false)
+        elseif ($data['status'] === false)
         {
             echo $twig->render('admin\login.twig', array('status'=>'error'));
         }
@@ -107,7 +108,8 @@ class Users extends Acme\Controller
     public function validateUsers()
     {
         $tab = $_POST['tab'];
-        $d = parent::model('User')->changeStatus($tab);
+        parent::model('User')->changeStatus($tab);
+
 
     }
 }
