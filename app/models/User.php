@@ -16,6 +16,7 @@ class User
     public function __construct()
     {
         $req = $this->bdd = new pdo('mysql:host=' . $this->host . ';dbname=' . $this->dbname, $this->user, $this->pwd, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+        return $req;
     }
 
     public function chekedAccount($email, $pwd)
