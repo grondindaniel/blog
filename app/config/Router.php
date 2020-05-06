@@ -51,6 +51,6 @@ class Router
         $url = $_SERVER['QUERY_STRING'];
         $url = rtrim($url,'/');
         $url = explode('/', $url);
-        return $url;
+        return $url."\r\n";
     }
 }
