@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -27,7 +27,51 @@
         }
     </script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
+    <script src="../vendor/tinymce/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#title',  // change this value according to your HTML
+            height:200,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste imagetools wordcount"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
+    </script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#chapo',  // change this value according to your HTML
+            plugin: 'a_tinymce_plugin',
+            a_plugin_option: true,
+            height: 250,
+            a_configuration_option: 400
+        });
+    </script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#auteur',  // change this value according to your HTML
+            plugin: 'a_tinymce_plugin',
+            a_plugin_option: true,
+            height: 150,
+            a_configuration_option: 400
+        });
+    </script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: '#mytextarea',
+            height: 500,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste imagetools wordcount"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+            content_css: '//www.tiny.cloud/css/codepen.min.css'
+        });
+    </script>
 </head>
 <body id="page-top">
 <!-- Navigation-->
