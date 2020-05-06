@@ -12,8 +12,7 @@ class Posts extends Acme\Controller
         $title = $_POST['title'];
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
-        $auteur = $_POST['auteur'];
-        $data = parent::model('Post')->addPost($title, $chapo, $content);
+        parent::model('Post')->addPost($title, $chapo, $content);
     }
 
     /*
