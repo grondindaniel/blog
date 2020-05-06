@@ -19,10 +19,20 @@ class Posts extends Acme\Controller
     /*
     * Create view for add a post
     */
-    public function AddPostPage()
+    public function addPostPage()
     {
-        $twig = parent::twig();
-        echo $twig->render('post\pageAddPost.twig', array());
+        session_start();
+        if($_SESSION['level']=='high')
+        {
+            $twig = parent::twig();
+            echo $twig->render('post\pageAddPost.twig', array('level'=>$_SESSION['level']));
+        }
+        else
+        {
+            $twig = parent::twig();
+            echo $twig->render('\home\index.twig', array());
+        }
+
     }
 
     public function index()

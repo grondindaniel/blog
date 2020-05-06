@@ -94,7 +94,7 @@ class Users extends Acme\Controller
      * list all the users who
      * are waiting for registration
      */
-    public function validate_new_users()
+    public function validateNewUsers()
     {
         $d = parent::model('User')->listWaitingUsers();
         $twig = parent::twig();
@@ -104,7 +104,7 @@ class Users extends Acme\Controller
     /*
      * Validate a user
      */
-    public function validate_users()
+    public function validateUsers()
     {
         $tab = $_POST['tab'];
         $d = parent::model('User')->changeStatus($tab);
