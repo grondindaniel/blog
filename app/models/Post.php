@@ -40,3 +40,4 @@ class Post
         return $data;
     }
 }
+
