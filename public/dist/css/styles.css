@@ -10224,31 +10224,13 @@ form .row:first-child .floating-label-form-group {
 }
 /* form login */
 
-.body_form{
-  width: 100%;
-  min-height: 100vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #19BB9A, #07D3A6);
-  background: -o-linear-gradient(-135deg, #19BB9A, #07D3A6);
-  background: -moz-linear-gradient(-135deg, #19BB9A, #07D3A6);
-  background: linear-gradient(-135deg,#19BB9A, #19BB9A);
-}
 
 .formulaire{
   width: 40%;
   height: 320px;
   margin: auto;
   position: relative;
-  margin-top: 200px;
+  margin-top: 50px;
   background-color: white;
   padding: 10px;
 }
@@ -10270,7 +10252,7 @@ form .row:first-child .floating-label-form-group {
 }
 
 
-input[type=text], input[type=password] {
+input[type=text],input[type=email], input[type=password] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -10305,7 +10287,7 @@ button:hover {
 .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
-  width: 40%;
+  width: 50%;
   margin: auto;
 }
 
@@ -10361,7 +10343,7 @@ input[type=submit] {
 }
 
 /* The message box is shown when the user clicks on the password field */
-#message {
+#message2 {
   display:none;
   background: #f1f1f1;
   color: #000;
@@ -10370,7 +10352,7 @@ input[type=submit] {
   margin-top: 10px;
 }
 
-#message p {
+#message2 p {
   padding: 10px 35px;
   font-size: 18px;
 }
