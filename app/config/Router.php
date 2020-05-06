@@ -39,10 +39,9 @@ class Router
             $twig = new \Twig\Environment($loader2, []);
             $loader2->addPath('public/dist/css/','css');
             $loader2->addPath('public/dist/assets/img/','img');
-            echo $twig->render('home\index.twig', []).PHP_EOL;
+            echo $twig->render('home\index.twig', []);
         }
     }
-    
     /*
       * collect controller and method
       * passed in url return in a array
