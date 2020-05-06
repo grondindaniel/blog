@@ -1,10 +1,19 @@
 {% extends 'basic_template.twig' %}
 
 
+
 {% block content %}
+
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Se connecter</h2>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+    </div>
     <div class="formulaire">
         <form action="../Users/loginCheck" method="post">
-            <input type="text" placeholder="Saisir votre adresse email" name="email" required>
+            <input type="email" placeholder="Saisir votre adresse email" name="email" required>
             <input type="password" placeholder="Saisir mot de passe" name="pwd" required>
             <button type="submit" style="background-color: #51A691;">Se connecter</button>
             {% if msg == 'error' %}
