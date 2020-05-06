@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {height: 1050px}
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* On small screens, set height to 'auto' for the grid */
+        @media screen and (max-width: 767px) {
+            .row.content {height: auto;}
+        }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Year', 'Utilisateurs', 'Commentaires'],
+                ['Mars',  10,      5],
+                ['Avril',  23,      6],
+                ['Mai',  11,       2],
+                ['Juin',  8,      1]
+            ]);
+
+            var options = {
+                title: 'Stats : Inscriptions / Commentaires',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse visible-xs">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Web Agile</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Dashboard</a></li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav hidden-xs">
+            <h2>Web Agile</h2>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="alert alert-success" style="background-color: tomato;"><a href="../" style="color: #FFFFFF;"><i class="fas fa-home"></i> HOME</a></li>
+                <li class="alert alert-success" style="background-color: tomato;"><a href="../" style="color: #FFFFFF;"><i class="fas fa-user-cog"></i> MON COMPTE</a></li>
+                <li class="alert alert-success" style="background-color: tomato;"><a href="../" style="color: #FFFFFF;"><i class="fas fa-user-cog"></i> {{ level }}</a></li>
+
+            </ul><br>
+        </div>
+        <br>
+
+        <div class="col-sm-9">
+            <div class="well">
+                <p> <div id="curve_chart" style="width: 900px; height: 500px; margin: auto;"></div></p>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="well">
+                        <h4>Demande d'inscription <i class="far fa-check-circle"></i></h4>
+                        <a href="../Users/validate_new_users"><p>{{ nombre }} utilisateurs</p></a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <h4>Commentaires en attente <i class="far fa-check-circle"></i></h4>
+                        <p>4 commentaires</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <h4>Gestion des utilisateurs <i class="fas fa-users-cog"></i></h4>
+                        <p>Voir</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="..\Posts\pageAddPost">
+                        <div class="well" style="text-align: center;">
+                            <strong> <p>Créer un nouveau post <i class="fas fa-feather-alt"></i></p></strong>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <div class="well" style="text-align: center;">
+                        <strong> <p>Editer un post <i class="fas fa-tools"></i></p></strong>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
