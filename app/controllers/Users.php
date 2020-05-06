@@ -51,16 +51,17 @@ class Users extends Acme\Controller
         {
             session_start();
             $_SESSION['level']= 'high';
+            $level = $_SESSION['level'];
             $twig->addGlobal('email', $email);
-            echo $twig->render('admin\home_admin.twig', array('nombre'=>$nbNewUsers, 'level'=>$_SESSION['level']));
+            echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers, 'level'=>$level));
 
         }
         elseif ($data['valid'] == true && $data['role'] == '2' && intval($data['status']) == 1 && intval($data['suspend'])== 0)
         {
             session_start();
             $_SESSION['level']= 'low';
-
-            echo $twig->render('user\home_user.twig', array('level'=>$_SESSION['level']));
+            $level = $_SESSION['level'];
+            echo $twig->render('user\home_user.twig', array('level'=>$level));
 
         }
         elseif ($data['valid'] == false)
