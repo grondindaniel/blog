@@ -40,7 +40,6 @@ class Router
             $loader2->addPath('public/dist/css/','css');
             $loader2->addPath('public/dist/assets/img/','img');
             echo $twig->render('home\index.twig', ['name' => 'Fabien']);
-
         }
     }
 

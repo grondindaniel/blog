@@ -31,7 +31,6 @@ class Posts extends Acme\Controller
             $twig = parent::twig();
             echo $twig->render('\home\index.twig', array());
         }
-
     }
 
     public function index()

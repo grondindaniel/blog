@@ -73,9 +73,7 @@ class User
         $req->execute(array(
             ':user_id'=>$user_id,
             ':email'=>$email
-
         ));
-
     }
 
     public function waitingForValidation()
@@ -85,7 +83,6 @@ class User
         $nb = $req->fetchAll();
         $nb = count($nb);
         return $nb;
-
     }
 
     public function listWaitingUsers()
@@ -104,7 +101,5 @@ class User
             $req->bindValue(':id',$id,PDO::PARAM_INT);
             $req->execute();
         }
-
     }
-
 }

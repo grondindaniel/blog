@@ -109,7 +109,5 @@ class Users extends Acme\Controller
     {
         $tab = $_POST['tab'];
         parent::model('User')->changeStatus($tab);
-
-
     }
 }
