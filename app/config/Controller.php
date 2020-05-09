@@ -7,7 +7,9 @@
  */
 
 namespace Acme;
+
 use Twig\Extra\String\StringExtension;
+
 
 class Controller
 {
@@ -29,8 +31,9 @@ class Controller
         $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
         $loader->addPath('public/dist/css/','css');
         $loader->addPath('vendor/', 'vendor');
-        $twig = new \Twig\Environment($loader, []);
+        $twig = new \Twig\Environment($loader, ['debug' => true]);
         $twig->addExtension(new StringExtension());
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
         return $twig;
     }
 }

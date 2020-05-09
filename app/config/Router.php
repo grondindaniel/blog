@@ -32,13 +32,16 @@ class Router
                     call_user_func([$controller,$method],array_values($url));
                 }
             }
+            $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
+            $twig = new \Twig\Environment($loader, []);
+            echo $twig->render('404\404.twig', []);
         }
         else
         {
-            $loader2 = new \Twig\Loader\FilesystemLoader('app/views/templates');
-            $twig = new \Twig\Environment($loader2, []);
-            $loader2->addPath('public/dist/css/','css');
-            $loader2->addPath('public/dist/assets/img/','img');
+            $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
+            $twig = new \Twig\Environment($loader, []);
+            $loader->addPath('public/dist/css/','css');
+            $loader->addPath('public/dist/assets/img/','img');
             echo $twig->render('home\index.twig', []);
         }
     }
@@ -51,6 +54,6 @@ class Router
         $url = $_SERVER['QUERY_STRING'];
         $url = rtrim($url,'/');
         $url = explode('/', $url);
-        return $url."\r\n";
+        return $url;
     }
 }
