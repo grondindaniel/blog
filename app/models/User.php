@@ -19,11 +19,14 @@ class User
         return $req;
     }
 
+    /*
+     * Check email with password
+     */
     public function chekedAccount($email, $pwd)
     {
 
         $req = $this->bdd->prepare(
-            'SELECT user.pwd, user.role_id, status.status, email.email, email.suspend FROM user 
+            'SELECT user.id, user.pwd, user.firstname, user.lastname, user.role_id, status.status, email.email, email.suspend FROM user 
                       INNER JOIN email on user.id = email.user_id
                       INNER JOIN status on status.id = user.status_id
                       WHERE email =:email;');
@@ -37,11 +40,42 @@ class User
             'role' => $check['role_id'],
             'status' => $check['status'],
             'suspend' => $check['suspend'],
-            'email' => $check['email']
+            'email' => $check['email'],
+            'firstname'=>$check['firstname'],
+            'lastname'=>$check['lastname'],
+            'id'=>$check['id']
         );
         return $d;
     }
 
+    /*
+     * Edit identity
+     */
+    public function editUser($id, $firstname, $lastname)
+    {
+        $id = intval($_SESSION['id']);
+        $email = $_POST['email'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $req = $this->bdd->prepare("UPDATE user SET id=:id, firstname=:firstname, lastname=:lastname WHERE id=:id");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $k=$req->execute(array(
+            ':id'=>$id,
+            ':firstname'=>$firstname,
+            ':lastname'=>$lastname
+        ));
+        $req = $this->bdd->prepare("UPDATE email SET user_id=:id, email=:email WHERE user_id=:id");
+        $req->bindValue(':user_id',$id,PDO::PARAM_INT);
+        $k=$req->execute(array(
+            ':id'=>$id,
+            ':email'=>$email
+        ));
+        var_dump($k);
+    }
+
+    /*
+     * register new user
+     */
     public function addUser($firstname, $lastname, $pwd, $email)
     {
 
@@ -77,6 +111,9 @@ class User
         ));
     }
 
+    /*
+     * Count nb account waiting for validation
+     */
     public function waitingForValidation()
     {
         $req = $this->bdd->prepare("SELECT id FROM user WHERE status_id != 1");
@@ -86,6 +123,9 @@ class User
         return $nb;
     }
 
+    /*
+     * liste users who are waiting validation
+     */
     public function listWaitingUsers()
     {
         $req = $this->bdd->prepare("SELECT user.firstname, user.lastname, user.id FROM user WHERE status_id = 2");
@@ -94,6 +134,9 @@ class User
         return $d;
     }
 
+    /*
+     * Valide new status
+     */
     public function changeStatus($tab)
     {
         foreach ($tab as $id)
