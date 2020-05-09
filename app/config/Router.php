@@ -38,11 +38,12 @@ class Router
         }
         else
         {
+            session_start();
             $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
             $twig = new \Twig\Environment($loader, []);
             $loader->addPath('public/dist/css/','css');
             $loader->addPath('public/dist/assets/img/','img');
-            echo $twig->render('home\index.twig', []);
+            echo $twig->render('home\index.twig', array('active'=>$_SESSION['active']));
         }
     }
     /*
