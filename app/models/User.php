@@ -36,7 +36,8 @@ class User
             'valid' => $valid,
             'role' => $check['role_id'],
             'status' => $check['status'],
-            'suspend' => $check['suspend']
+            'suspend' => $check['suspend'],
+            'email' => $check['email']
         );
         return $d;
     }
