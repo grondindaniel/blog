@@ -59,14 +59,14 @@ class User
         $lastname = $_POST['lastname'];
         $req = $this->bdd->prepare("UPDATE user SET id=:id, firstname=:firstname, lastname=:lastname WHERE id=:id");
         $req->bindValue(':id',$id,PDO::PARAM_INT);
-        $k=$req->execute(array(
+        $req->execute(array(
             ':id'=>$id,
             ':firstname'=>$firstname,
             ':lastname'=>$lastname
         ));
         $req = $this->bdd->prepare("UPDATE email SET user_id=:id, email=:email WHERE user_id=:id");
         $req->bindValue(':user_id',$id,PDO::PARAM_INT);
-        $k=$req->execute(array(
+        $req->execute(array(
             ':id'=>$id,
             ':email'=>$email
         ));
