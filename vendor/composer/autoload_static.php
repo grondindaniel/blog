@@ -28,6 +28,7 @@ class ComposerStaticInit10ecee6bb67e33cdf4d1b79435910b4c
             'Symfony\\Polyfill\\Ctype\\' => 23,
             'Symfony\\Contracts\\Translation\\' => 30,
             'Symfony\\Component\\String\\' => 25,
+            'Symfony\\Bridge\\Twig\\' => 20,
         ),
         'A' => 
         array (
@@ -67,6 +68,10 @@ class ComposerStaticInit10ecee6bb67e33cdf4d1b79435910b4c
         'Symfony\\Component\\String\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/string',
+        ),
+        'Symfony\\Bridge\\Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/twig-bridge',
         ),
         'Acme\\' => 
         array (
