@@ -11,7 +11,8 @@
     "require": {
         "twig/twig": "^3.0",
         "tinymce/tinymce": ">= 5",
-        "twig/string-extra": "^3.0"
+        "twig/string-extra": "^3.0",
+        "symfony/twig-bridge": "^5.0"
     },
 
     "autoload": {
