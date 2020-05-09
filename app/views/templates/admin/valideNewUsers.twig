@@ -1,0 +1,34 @@
+{% extends 'basic_template.twig' %}
+{% block content %}
+    {% if role == 1 %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname </th>
+            <th>Valider</th>
+        </tr>
+        </thead>
+        <tbody>
+        <form  method="POST" action="../Users/validateUsers">
+            {% for user in list %}
+
+            <tr>
+                <td>{{ user.firstname }}   </td>
+                <td>{{ user.lastname }}</td>
+                <td>
+                    <div class="checkbox">
+                        <input type="checkbox" value="{{ user.id }}" name="tab[]">
+                    </div>
+                </td>
+            </tr>
+
+        {% endfor %}
+        </form>
+        </tbody>
+    </table>
+    <input type="submit" value="Valider"></input>
+    {% else %}
+        <p>Héhéhé what do you espect ??</p>
+    {% endif %}
+{% endblock %}
