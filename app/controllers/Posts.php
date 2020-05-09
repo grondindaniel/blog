@@ -21,16 +21,8 @@ class Posts extends Acme\Controller
     public function addPostPage()
     {
         session_start();
-        if($_SESSION['level']=='high')
-        {
-            $twig = parent::twig();
-            echo $twig->render('post\pageAddPost.twig', array('level'=>$_SESSION['level']));
-        }
-        else
-        {
-            $twig = parent::twig();
-            echo $twig->render('\home\index.twig', array());
-        }
+        $twig = parent::twig();
+        echo $twig->render('post\pageAddPost.twig', array('role'=>$_SESSION['role']));
     }
 
     public function index()
