@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,8 +77,7 @@
             <ul class="nav nav-pills nav-stacked">
                 <li class="alert alert-success" style="background-color: tomato;"><a href="../" style="color: #FFFFFF;"><i class="fas fa-home"></i> HOME</a></li>
                 <li class="alert alert-success" style="background-color: tomato;"><a href="../" style="color: #FFFFFF;"><i class="fas fa-user-cog"></i> MON COMPTE</a></li>
-                <li class="alert alert-success" style="background-color: tomato;"><a href="../" style="color: #FFFFFF;"><i class="fas fa-user-cog"></i> </a></li>
-
+                <li class="alert alert-success" style="background-color: tomato;"><a href="../" style="color: #FFFFFF;"><i class="fas fa-user-cog"></i>{{ session }}</a></li>
             </ul><br>
         </div>
         <br>
@@ -92,7 +90,7 @@
                 <div class="col-sm-4">
                     <div class="well">
                         <h4>Demande d'inscription <i class="far fa-check-circle"></i></h4>
-                        <a href="../Users/validate_new_users"><p>{{ nombre }} utilisateurs</p></a>
+                        <a href="../Users/validateNewUsers"><p>{{ nombre }} utilisateurs</p></a>
                     </div>
                 </div>
                 <div class="col-sm-4">
