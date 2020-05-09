@@ -4,6 +4,7 @@
 
 
     {% block content %}
+        {% if role == 1 %}
         <h1>Créer votre post</h1>
         <hr>
 
@@ -23,5 +24,6 @@
 
             <input type="submit" name="submit" class="btn btn-primary" value="Envoyer"
         </form>
+        {% endif %}
     {% endblock %}
 
