@@ -1,7 +1,7 @@
 {% extends 'basic_template.twig' %}
 
 {% block content %}
-
+{{ session }}
     {% for post in data %}
         {% autoescape %}
             <div class="post_tilte"> {{ post.title | raw }} </div>
