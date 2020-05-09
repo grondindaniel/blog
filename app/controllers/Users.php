@@ -50,6 +50,10 @@ class Users extends Acme\Controller
         $twig = parent::twig();
         $nbNewUsers = self::nbUsersWaitingForValidation();
         $_SESSION['role'] = $data['role'];
+        $_SESSION['email'] = $data['email'];
+        $_SESSION['firstname'] = $data['firstname'];
+        $_SESSION['lastname'] = $data['lastname'];
+        $_SESSION['id'] = $data['id'];
         if($data['valid'] === true && intval($data['role']) == 1)
         {
             $_SESSION['active'] = true;
@@ -73,6 +77,9 @@ class Users extends Acme\Controller
         }
     }
 
+    /*
+     * Destroy the active session
+     */
     public function destroy()
     {
         session_start();$_SESSION = array();
@@ -82,6 +89,39 @@ class Users extends Acme\Controller
         echo 'session morte';
     }
 
+    /*
+     * Access to edit page
+     */
+    public function editAdmin()
+    {
+        session_start();
+        $twig = parent::twig();
+        echo $twig->render('admin\editAdmin.twig',
+            array(
+                'role'=>$_SESSION['role'],
+                'firstname'=>$_SESSION['firstname'],
+                'lastname'=>$_SESSION['lastname'],
+                'email'=>$_SESSION['email'],
+                'id'=>intval($_SESSION['id'])));
+    }
+
+    /*
+     * Edit identity
+     */
+    public function editUser()
+    {
+        session_start();
+        $id = $_SESSION['id'];
+        $email = $_POST['email'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $twig = parent::model('User')->editUser($id, $firstname, $lastname);
+        $_SESSION = array();
+        if (ini_get("session.use_cookies"))
+        {$params = session_get_cookie_params();setcookie(session_name(), '', time() - 42000,$params["path"], $params["domain"],$params["secure"], $params["httponly"]);}
+        session_destroy();
+        echo 'session morte';
+    }
 
 
     /*
