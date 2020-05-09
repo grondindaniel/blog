@@ -34,7 +34,6 @@ class Users extends Acme\Controller
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
         parent::model('User')->addUser($firstname, $lastname,$email, $pwd);
-
     }
 
 
@@ -43,27 +42,22 @@ class Users extends Acme\Controller
      */
     public function loginCheck()
     {
+        session_start();
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
         $data = parent::model('User')->chekedAccount($email, $pwd);
+
         $twig = parent::twig();
         $nbNewUsers = self::nbUsersWaitingForValidation();
+        $_SESSION['role'] = $data['role'];
         if($data['valid'] === true && intval($data['role']) == 1)
         {
-            session_start();
-            $_SESSION['level']= 'high';
-            $level = $_SESSION['level'];
-            $twig->addGlobal('email', $email);
-            echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers, 'level'=>$level));
-
+            $_SESSION['active'] = true;
+            echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
         }
         elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status']) == 1 && intval($data['suspend'])== 0)
         {
-            session_start();
-            $_SESSION['level']= 'low';
-            $level = $_SESSION['level'];
-            echo $twig->render('user\home_user.twig', array('level'=>$level));
-
+            echo $twig->render('user\home_user.twig', array());
         }
         elseif ($data['valid'] === false)
         {
@@ -77,6 +71,15 @@ class Users extends Acme\Controller
         {
             echo $twig->render('admin\login.twig', array('suspend'=>'true'));
         }
+    }
+
+    public function destroy()
+    {
+        session_start();$_SESSION = array();if (ini_get("session.use_cookies"))
+    {$params = session_get_cookie_params();setcookie(session_name(), '',
+        time() - 42000,$params["path"], $params["domain"],$params["secure"], $params["httponly"]);}
+        session_destroy();
+        echo 'session morte';
     }
 
 
@@ -97,9 +100,10 @@ class Users extends Acme\Controller
      */
     public function validateNewUsers()
     {
+        session_start();
         $d = parent::model('User')->listWaitingUsers();
         $twig = parent::twig();
-        echo $twig->render('admin\validate_new_users.twig', array('list'=>$d));
+        echo $twig->render('admin\valideNewUsers.twig', array('list'=>$d,'role'=>$_SESSION['role']));
     }
 
     /*
@@ -111,3 +115,4 @@ class Users extends Acme\Controller
         parent::model('User')->changeStatus($tab);
     }
 }
+
