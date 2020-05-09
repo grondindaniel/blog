@@ -112,10 +112,10 @@ class Users extends Acme\Controller
     {
         session_start();
         $id = $_SESSION['id'];
-        $email = $_POST['email'];
+        //$email = $_POST['email'];
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
-        $twig = parent::model('User')->editUser($id, $firstname, $lastname);
+        parent::model('User')->editUser($id, $firstname, $lastname);
         $_SESSION = array();
         if (ini_get("session.use_cookies"))
         {$params = session_get_cookie_params();setcookie(session_name(), '', time() - 42000,$params["path"], $params["domain"],$params["secure"], $params["httponly"]);}
