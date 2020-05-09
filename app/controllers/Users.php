@@ -112,7 +112,6 @@ class Users extends Acme\Controller
     {
         session_start();
         $id = $_SESSION['id'];
-        //$email = $_POST['email'];
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         parent::model('User')->editUser($id, $firstname, $lastname);
