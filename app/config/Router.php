@@ -24,6 +24,11 @@ class Router
             {
                 require_once 'app/controllers/'.$controller.'.php';
             }
+            else{
+                $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
+                $twig = new \Twig\Environment($loader, []);
+                echo $twig->render('404\404.twig', []);
+            }
             $method = $url[1];
             if(isset($method))
             {
@@ -32,9 +37,7 @@ class Router
                     call_user_func([$controller,$method],array_values($url));
                 }
             }
-            $loader = new \Twig\Loader\FilesystemLoader('app/views/templates');
-            $twig = new \Twig\Environment($loader, []);
-            echo $twig->render('404\404.twig', []);
+
         }
         else
         {
