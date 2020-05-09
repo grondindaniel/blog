@@ -70,7 +70,6 @@ class User
             ':id'=>$id,
             ':email'=>$email
         ));
-        var_dump($k);
     }
 
     /*
