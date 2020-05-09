@@ -24,6 +24,10 @@
 
             <input type="submit" name="submit" class="btn btn-primary" value="Envoyer"
         </form>
+            {% else %}
+                <div class="alert alert-info">
+                    <strong>Merci de vous connecter </strong> pour créer un post.
+                </div>
         {% endif %}
     {% endblock %}
 
