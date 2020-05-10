@@ -77,7 +77,6 @@ class User
      */
     public function addUser($firstname, $lastname, $pwd, $email)
     {
-
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $pwd = $_POST['pwd'];
