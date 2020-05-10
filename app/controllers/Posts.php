@@ -5,7 +5,7 @@ class Posts extends Acme\Controller
 {
 
     /*
-   * Function for adding post to post table
+   * method for adding post to post table
    */
     public function addPost()
     {
@@ -13,6 +13,40 @@ class Posts extends Acme\Controller
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
         parent::model('Post')->addPost($title, $chapo, $content);
+    }
+
+    /*
+     * method to access editing list post page
+     */
+    public function editPostPage()
+    {
+        session_start();
+        $data = parent::model('Post')->getPosts();
+        $twig = parent::twig();
+        echo $twig->render('post\editPostPage.twig', array('data'=>$data,'role'=>$_SESSION['role']));
+    }
+
+    /*
+     * method to access editing a post
+     */
+    public function editPost($id)
+    {
+        session_start();
+        $data = parent::model('Post')->getContent($id);
+        $twig = parent::twig();
+        echo $twig->render('post\editPost.twig', array('data'=>$data,'role'=>$_SESSION['role']));
+    }
+
+    /*
+     * method to change post values
+     */
+    public function changePost()
+    {
+        $id = $_POST['id'];
+        $title = $_POST['title'];
+        $chapo = $_POST['chapo'];
+        $content = $_POST['content'];
+        parent::model('Post')->changePost($id, $title, $chapo, $content);
     }
 
     /*
@@ -40,9 +74,10 @@ class Posts extends Acme\Controller
      */
     public function show($id)
     {
+        session_start();
         $data = parent::model('Post')->getContent($id);
         $twig = parent::twig();
-        echo $twig->render('post\show.twig', array('content'=>$data));
+        echo $twig->render('post\show.twig', array('content'=>$data,'role'=>$_SESSION['role']));
     }
 
 }
