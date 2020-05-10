@@ -1,0 +1,28 @@
+{% extends 'basic_template_2.twig' %}
+
+    {% block content %}
+
+
+        {% if role == 1 %}
+            <h1>Modifier votre post</h1>
+            <hr>
+            <form method="POST" action="../Posts/ChangePost">
+                <h4>Titre du post</h4>
+                <input type="text" id="title2" name="title">{{ data.title }}
+                <hr>
+                <h4>Châpo</h4>
+                <input type="text" id="chapo2" name="chapo">
+                <hr>
+                <h4>Contenu</h4>
+                <textarea id="mytextarea2" name="content"></textarea>
+                <hr>
+
+                <input type="submit" name="submit" class="btn btn-primary" value="Envoyer">
+            </form>
+        {% else %}
+            <div class="alert alert-info">
+                <strong>Merci de vous connecter </strong> pour créer un post.
+            </div>
+        {% endif %}
+
+    {% endblock %}
