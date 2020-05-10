@@ -24,14 +24,17 @@ class Post
      */
     public function addPost(string $title, string $chapo, string $content)
     {
-
-        $user_id = 23;
+        session_start();
+        $user_id = $_SESSION['id'];
         $last_update = date("Y-m-d H:i:s");
         $req = $this->bdd->prepare("INSERT INTO post (title,chapo,content,last_update,user_id) VALUES (:title,:chapo,:content,:last_update,:user_id)");
         $req->execute(array(':title'=>$title,':chapo'=>$chapo,':content'=>$content,':last_update'=>$last_update,':user_id'=>$user_id));
         return true;
     }
 
+    /*
+     * give all posts off post table
+     */
     public function getPosts()
     {
         $req = $this->bdd->prepare('select * from post ORDER BY id DESC');
