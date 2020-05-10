@@ -2,10 +2,25 @@
 
 {% block content %}
 {{ session }}
+    <ul>
     {% for post in data %}
-        {% autoescape %}
-            <div class="post_tilte"> {{ post.title | raw }} </div>
-        {% endautoescape %}
+        <li>
+            <div class="card">
+                {% autoescape %}
+                    <div class="post_tilte"> {{ post.title | raw }} </div>
+                {% endautoescape %}
+                <div class="container" style="max-width:100%">
+                    {% autoescape %}
+                        <p> {{ post.chapo | u.truncate(200, '...') | raw }} </p>
+                        <a href="../Posts/show/{{ post.id }}">Lire la suite</a>
+                    {% endautoescape %}
+                    <br>
+                    <hr style="width: 60%">
+                    <div class="date">  {{ post.dates | date('d/m/y H:i:s') }}  </div>
+                </div>
+            </div>
+        </li>
     {% endfor %}
+    </ul>
 
 {% endblock %}
