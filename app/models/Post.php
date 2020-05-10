@@ -66,7 +66,7 @@ class Post
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
         $last_update = date("Y-m-d H:i:s");
-        $req = $this->bdd->prepare("UPDATE post SET id=:id, title=:title, chapo=:chapo, content=:content, last_update:last_update WHERE id=:id");
+        $req = $this->bdd->prepare("UPDATE post SET id=:id, title=:title, chapo=:chapo, content=:content, last_update=:last_update WHERE id=:id");
         $req->bindValue(':id',$id,PDO::PARAM_INT);
         $req->execute(array(
             ':id'=>$id,
