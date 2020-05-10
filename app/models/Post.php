@@ -42,5 +42,18 @@ class Post
         $data = $req->fetchAll();
         return $data;
     }
+
+    /*
+     * get data for display content
+     */
+    public function getContent($id)
+    {
+        $id = $id[2];
+        $req = $this->bdd->prepare('SELECT * FROM post  where id =:id');
+        $req->bindValue(':id',$id,PDO::PARAM_STR);
+        $req->execute();
+        $data = $req->fetch();
+        return $data;
+    }
 }
 
