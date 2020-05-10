@@ -1,0 +1,34 @@
+{% extends 'basic_template.twig' %}
+
+{% block content %}
+    {% block titlePost %}
+        {% autoescape %}
+            <h4>{{ content.title | raw }}</h4>
+        {% endautoescape %}
+    {% endblock %}
+
+    {% block detailPost %}
+        <div class="well well-lg">
+            {% autoescape %}
+                {{ content.chapo | raw }} <br>
+            {% endautoescape %}
+        </div>
+
+        <div class="well well-lg">
+            {% autoescape %}
+                {{ content.content | raw }} <br>
+            {% endautoescape %}
+            <hr>
+            <a href="#demo"  data-toggle="collapse"> 2 commentaires <i class="far fa-comment"></i></a>
+            <div id="demo" class="collapse">
+                <p>
+                    Merci pour cet article !
+                </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}
