@@ -16,7 +16,7 @@
                     {% endautoescape %}
                     <br>
                     <hr style="width: 60%">
-                    <div class="date">  {{ post.dates | date('d/m/y H:i:s') }}  </div>
+                    <div class="date">  {{ post.last_update | date('d/m/y H:i:s') }}  </div>
                 </div>
             </div>
         </li>
