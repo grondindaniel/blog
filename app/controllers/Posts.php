@@ -7,7 +7,7 @@ class Posts extends Acme\Controller
     /*
    * Function for adding post to post table
    */
-    public function addPost($data)
+    public function addPost()
     {
         $title = $_POST['title'];
         $chapo = $_POST['chapo'];
