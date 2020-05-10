@@ -55,5 +55,26 @@ class Post
         $data = $req->fetch();
         return $data;
     }
+
+    /*
+ * get data for display content
+ */
+    public function changePost($id, $title, $chapo, $content)
+    {
+        $id = intval($_POST['id']);
+        $title = $_POST['title'];
+        $chapo = $_POST['chapo'];
+        $content = $_POST['content'];
+        $last_update = date("Y-m-d H:i:s");
+        $req = $this->bdd->prepare("UPDATE post SET id=:id, title=:title, chapo=:chapo, content=:content, last_update:last_update WHERE id=:id");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute(array(
+            ':id'=>$id,
+            ':title'=>$title,
+            ':chapo'=>$chapo,
+            ':content'=>$content,
+            ':last_update'=>$last_update
+        ));
+    }
 }
 
