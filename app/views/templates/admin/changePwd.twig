@@ -1,0 +1,32 @@
+{% extends 'basic_template.twig' %}
+
+{% block content %}
+
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Modifier son mot de passe</h2>
+    <!-- Icon Divider-->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+        <div class="divider-custom-line"></div>
+    </div>
+
+    <div class="formulaire2">
+        <form action="../Users/updatePwd" method="post" onSubmit="return validate();">
+            <input type="password" placeholder="Saisir le nouveau mot de passe" id="pwd" name="pwd" required>
+            <input type="password" placeholder="Confirmer le nouveau mot de passe" id="pwd_verif" name="pwd" required>
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="submit" style="background-color: #51A691;width: 30%;">Modifier</button>
+                </div>
+            </div>
+        </form>
+        <div id="message2">
+            <h3>Le mot de passe devrait contenir :</h3>
+            <p id="letter" class="invalid">Au minimun une <b>minuscule</b> </p>
+            <p id="capital" class="invalid">Au minimun une <b>majuscule</b> </p>
+            <p id="number" class="invalid">Au minimun un <b>chiffre</b></p>
+            <p id="length" class="invalid">Au minimun <b>8 caractères</b></p>
+        </div>
+    </div>
+{% endblock %}
+
