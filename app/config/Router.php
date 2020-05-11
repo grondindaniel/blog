@@ -37,7 +37,6 @@ class Router
                     call_user_func([$controller,$method],array_values($url));
                 }
             }
-
         }
         else
         {
