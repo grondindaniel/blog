@@ -9,8 +9,9 @@ class Users extends Acme\Controller
      */
     public function login()
     {
+        $postId = $_POST['postId'];
         $twig = parent::twig();
-        echo $twig->render('admin\login.twig',array());
+        echo $twig->render('admin\login.twig',array('postId'=>$postId));
     }
 
     /*
@@ -46,7 +47,6 @@ class Users extends Acme\Controller
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
         $data = parent::model('User')->chekedAccount($email, $pwd);
-
         $twig = parent::twig();
         $nbNewUsers = self::nbUsersWaitingForValidation();
         $_SESSION['role'] = $data['role'];
@@ -78,6 +78,7 @@ class Users extends Acme\Controller
         }
     }
 
+
     /*
      * Destroy the active session
      */
@@ -95,7 +96,7 @@ class Users extends Acme\Controller
     /*
      * Access to edit page
      */
-    public function editAdmin()
+    public function editAccount()
     {
         session_start();
         $twig = parent::twig();
