@@ -9,3 +9,4 @@ class Comments extends Acme\Controller
         echo $twig->render('comment\index.twig',array('id'=>$id));
     }
 }
+
