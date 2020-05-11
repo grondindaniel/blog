@@ -61,7 +61,8 @@ class Users extends Acme\Controller
         }
         elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status']) == 1 && intval($data['suspend'])== 0)
         {
-            echo $twig->render('user\home_user.twig', array());
+            $_SESSION['active'] = true;
+            echo $twig->render('user\index.twig', array('role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
         }
         elseif ($data['valid'] === false)
         {
