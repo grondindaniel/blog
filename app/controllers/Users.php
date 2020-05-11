@@ -49,6 +49,7 @@ class Users extends Acme\Controller
         $data = parent::model('User')->chekedAccount($email, $pwd);
         $twig = parent::twig();
         $nbNewUsers = self::nbUsersWaitingForValidation();
+        $nbNewComments = self::nbCommentsWaitingForValidation();
         $_SESSION['role'] = $data['role'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['firstname'] = $data['firstname'];
@@ -57,7 +58,7 @@ class Users extends Acme\Controller
         if($data['valid'] === true && intval($data['role']) == 1)
         {
             $_SESSION['active'] = true;
-            echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
+            echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments));
         }
         elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status']) == 1 && intval($data['suspend'])== 0)
         {
@@ -156,6 +157,16 @@ class Users extends Acme\Controller
     public function nbUsersWaitingForValidation()
     {
         $n = parent::model('User')->waitingForValidation();
+        return $n;
+    }
+
+    /*
+     * check how many comments
+     * are waiting for registration
+     */
+    public function nbCommentsWaitingForValidation()
+    {
+        $n = parent::model('Comment')->listWaitingComments();
         return $n;
     }
 

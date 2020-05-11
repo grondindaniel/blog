@@ -14,6 +14,9 @@ class Comment
         $this->bdd = new pdo('mysql:host='.$this->host.';dbname='.$this->dbname,$this->user,$this->pwd,array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
     }
 
+    /*
+     * insert data in comment table
+     */
     public function add($comment_date, $comment, $user_id, $post_id, $role)
     {
         if($role == 1){$status = 1;}else{$status = 0;}
@@ -25,6 +28,18 @@ class Comment
             ':user_id'=>$user_id,
             ':post_id'=>$post_id
         ));
+    }
+
+    /*
+     * listing of comments who are waiting validation
+    */
+    public function listWaitingComments()
+    {
+        $req = $this->bdd->prepare("SELECT * FROM comment WHERE status = 0");
+        $req->execute();
+        $nb = $req->fetchAll();
+        $nb = count($nb);
+        return $nb;
     }
 }
 
