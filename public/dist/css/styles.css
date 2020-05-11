@@ -10395,3 +10395,8 @@ input[type=submit] {
 li{
   list-style-type: none;
 }
+
+/* margin right after icon comment */
+.comment-right{
+  margin-right: 10px;
+}
