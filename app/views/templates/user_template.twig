@@ -25,10 +25,11 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Posts/index">blog</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
-                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Users/register">S'inscrire</a></li>
                 {% if active == false %}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Users/register">S'inscrire</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Users/login">Se connecter</a></li>
                 {% else %}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Users/editAccount">Mon compte</a></li>
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Users/destroy">Se déconnecter</a></li>
                 {% endif %}
             </ul>
@@ -47,7 +48,7 @@
             <div class="divider-custom-line"></div>
         </div>
         <!-- Masthead Subheading-->
-        <p class="masthead-subheading font-weight-light mb-0">Développeur senior pour des projets agiles et ambitieux</p>
+        <p class="masthead-subheading font-weight-light mb-0">Ecoute, qualité, sécurité</p>
     </div>
 </header>
 <!-- Portfolio Section-->
