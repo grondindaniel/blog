@@ -19,7 +19,12 @@
                 {{ content.content | raw }} <br>
             {% endautoescape %}
             <hr>
-            <a href="#demo"  data-toggle="collapse"> 2 commentaires <i class="far fa-comment"></i></a>
+            <a href="#demo" class="comment-right" data-toggle="collapse"> 2 commentaires <i class="far fa-comment"></i></a>
+            {% if role == 1 or role == 2 %}
+            <a href="#demo" data-toggle="collapse">Commenter</a>
+            {% else %}
+            <a href="../../Users/login">Se connecter pour commenter</a>
+            {% endif %}
             <div id="demo" class="collapse">
                 <p>
                     Merci pour cet article !
@@ -28,6 +33,14 @@
                     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                     quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </p>
+                {% if role == 1 or role == 2 %}
+                    <div class="form-group">
+                        <hr>
+                        <label for="comment"><strong>Votre commentaire :</strong></label>
+                        <textarea class="form-control" rows="5" id="comment" placeholder="Merci de saisir votre commentaire" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Envoyer</button>
+                {% endif %}
             </div>
         </div>
         {% if role == 1 %}
