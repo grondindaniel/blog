@@ -37,9 +37,12 @@
                     <div class="form-group">
                         <hr>
                         <label for="comment"><strong>Votre commentaire :</strong></label>
-                        <textarea class="form-control" rows="5" id="comment" placeholder="Merci de saisir votre commentaire" required></textarea>
+                        <form method="post" action="../../Comments/add">
+                        <textarea class="form-control" rows="5" name="comment" placeholder="Merci de saisir votre commentaire" required></textarea>
+                            <input type="hidden" name="post_id" value="{{ content.id }}">
+                            <button type="submit" class="btn btn-success">Envoyer</button>
+                        </form>
                     </div>
-                    <button type="submit" class="btn btn-success">Envoyer</button>
                 {% endif %}
             </div>
         </div>
