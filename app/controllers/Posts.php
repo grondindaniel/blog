@@ -38,6 +38,15 @@ class Posts extends Acme\Controller
     }
 
     /*
+    * method to destroy a post
+    */
+    public function destroyPost($id)
+    {
+        $id = $_POST['id'];
+        parent::model('Post')->destroyPost($id);
+    }
+
+    /*
      * method to change post values
      */
     public function changePost()
