@@ -108,6 +108,28 @@ class Users extends Acme\Controller
     }
 
     /*
+     * Access to change pwd page
+     */
+    public function changePwd()
+    {
+        session_start();
+        $twig = parent::twig();
+        echo $twig->render('admin\changePwd.twig', array('role'=>$_SESSION['role']));
+    }
+
+    /*
+     * Access to change pwd page
+     */
+    public function updatePwd()
+    {
+        session_start();
+        $id = $_SESSION['id'];
+        $pwd = $_POST['pwd'];
+        parent::model('User')->updatePwd($id, $pwd);
+    }
+
+
+    /*
      * Edit identity
      */
     public function editUser()

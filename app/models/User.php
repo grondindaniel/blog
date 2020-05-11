@@ -73,6 +73,23 @@ class User
     }
 
     /*
+     * Change pwd
+     */
+    public function updatePwd($id, $pwd)
+    {
+        $id = intval($id);
+        $pwd = $_POST['pwd'];
+        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $req = $this->bdd->prepare("UPDATE user SET id=:id, pwd=:pwd WHERE id=:id");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute(array(
+            ':id'=>$id,
+            ':pwd'=>$pwd
+        ));
+    }
+
+
+    /*
      * register new user
      */
     public function addUser($firstname, $lastname, $pwd, $email)
