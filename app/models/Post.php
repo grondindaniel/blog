@@ -57,8 +57,8 @@ class Post
     }
 
     /*
- * get data for display content
- */
+    * get data for display content
+    */
     public function changePost($id, $title, $chapo, $content)
     {
         $id = intval($_POST['id']);
@@ -76,4 +76,18 @@ class Post
             ':last_update'=>$last_update
         ));
     }
+
+    /*
+    * get post to destroy
+    */
+    public function destroyPost($id)
+    {
+        $id = intval($id);
+        $req = $this->bdd->prepare("DELETE FROM post  WHERE id=:id");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute(array(
+            ':id'=>$id
+        ));
+    }
 }
+
