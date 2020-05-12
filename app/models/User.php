@@ -162,5 +162,34 @@ class User
             $req->execute();
         }
     }
+
+    /*
+     * get data for suspend an user
+     */
+    public function getUsers($id)
+    {
+        $req = $this->bdd->prepare("SELECT * FROM email WHERE user_id != :id ");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute();
+        return $req->fetchAll();
+    }
+
+    /*
+     * get data for suspend an user
+     */
+    public function getDetailsUserForSuspension($id)
+    {
+        $id = $id[2];
+        $req = $this->bdd->prepare("SELECT user.id, user.firstname, user.lastname, user.status_id,email.user_id, email.email, email.suspend, comment.comment, comment.comment_date
+ FROM user 
+ INNER JOIN email ON 
+ email.user_id = user.id
+ LEFT JOIN comment ON 
+ comment.user_id = user.id
+ WHERE user.id = :id ");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute();
+        return $req->fetch();
+    }
 }
 

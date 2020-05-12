@@ -14,6 +14,29 @@ class Users extends Acme\Controller
     }
 
     /*
+     * method for access to login form
+     */
+    public function editUsers()
+    {
+        session_start();
+        $id = $_SESSION['id'];
+        $d = parent::model('User')->getUsers($id);
+        $twig = parent::twig();
+        echo $twig->render('admin\editUsers.twig',array('users'=>$d ,'role'=>$_SESSION['role']));
+    }
+
+    /*
+     * method for access user for suspend him
+    */
+    public function userSuspend($user_id)
+    {
+        session_start();
+        $d = parent::model('User')->getDetailsUserForSuspension($user_id);
+        $twig = parent::twig();
+        echo $twig->render('admin\editUserSuspend.twig',array('user'=>$d ,'role'=>$_SESSION['role']));
+    }
+
+    /*
     *
     * register method
     * for access the page
