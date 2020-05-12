@@ -9,9 +9,8 @@ class Users extends Acme\Controller
      */
     public function login()
     {
-        $postId = $_POST['postId'];
         $twig = parent::twig();
-        echo $twig->render('admin\login.twig',array('postId'=>$postId));
+        echo $twig->render('admin\login.twig',array());
     }
 
     /*
@@ -60,7 +59,7 @@ class Users extends Acme\Controller
             $_SESSION['active'] = true;
             echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments));
         }
-        elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status']) == 1 && intval($data['suspend'])== 0)
+        elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status_id']) == 1 && intval($data['suspend'])== 0)
         {
             $_SESSION['active'] = true;
             echo $twig->render('user\index.twig', array('role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
@@ -183,12 +182,33 @@ class Users extends Acme\Controller
     }
 
     /*
+     * list all the users who
+     * are waiting for registration
+     */
+    public function validateNewComments()
+    {
+        session_start();
+        $d = parent::model('Comment')->listWaitingCommentsForValidation();
+        $twig = parent::twig();
+        echo $twig->render('admin\valideNewComments.twig', array('list'=>$d,'role'=>$_SESSION['role']));
+    }
+
+    /*
      * Validate a user
      */
     public function validateUsers()
     {
         $tab = $_POST['tab'];
         parent::model('User')->changeStatus($tab);
+    }
+
+    /*
+     * Validate comments
+     */
+    public function validateComments()
+    {
+        $tab = $_POST['tab'];
+        parent::model('Comment')->changeStatus($tab);
     }
 }
 
