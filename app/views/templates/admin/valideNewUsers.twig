@@ -1,18 +1,17 @@
 {% extends 'basic_template.twig' %}
 {% block content %}
     {% if role == 1 %}
+        <form  method="POST" action="../Users/validateUsers">
     <table class="table table-bordered">
         <thead>
         <tr>
-            <th>Firstname</th>
-            <th>Lastname </th>
+            <th>Prénom</th>
+            <th>Nom </th>
             <th>Valider</th>
         </tr>
         </thead>
         <tbody>
-        <form  method="POST" action="../Users/validateUsers">
             {% for user in list %}
-
             <tr>
                 <td>{{ user.firstname }}   </td>
                 <td>{{ user.lastname }}</td>
@@ -22,13 +21,14 @@
                     </div>
                 </td>
             </tr>
-
         {% endfor %}
-        </form>
         </tbody>
     </table>
-    <input type="submit" value="Valider"></input>
+            <input type="submit" name="submit" class="btn btn-primary" value="Envoyer">
+        </form>
     {% else %}
-        <p>Héhéhé what do you espect ??</p>
+        <div class="alert alert-info">
+            <strong>Merci de vous connecter </strong>
+        </div>
     {% endif %}
 {% endblock %}
