@@ -1,0 +1,28 @@
+{% extends 'basic_template.twig' %}
+
+        {% block content %}
+            {% if role == 1 %}
+                <i class="fas fa-user"></i> :   {{ user.lastname }} {{ user.firstname }}<br>
+                <i class="fas fa-envelope"></i> : {{ user.email }}<br>
+                <hr>
+                <p>Dernier message :</p>
+                <i class="fas fa-comment"></i> : {{ user.comment }} posté le : {{ user.comment_date | date("d/m/y à H:i:s") }}<br>
+                <hr>
+                Suspendre le compte: <input type="checkbox" id="myCheck"  onclick="myFunction()">
+
+                <p id="text" style="display:none">
+                    <br>
+                    <input type="checkbox" class="form-check-input" value="1"> Cocher pour suspendre
+                    <br>
+                    <input type="submit"  value="Suspendre" class="btn btn-danger">
+                </p>
+
+
+
+            {% else %}
+                <div class="alert alert-info">
+                    <strong>Merci de vous connecter </strong>
+                </div>
+            {% endif %}
+        {% endblock %}
+

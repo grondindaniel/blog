@@ -1,0 +1,19 @@
+{% extends 'basic_template.twig' %}
+
+    {% block content %}
+        {% if role == 1 %}
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Saisir l'email..." title="Type in a name">
+            <ul id="myUL">
+                {% for user in users %}
+                <li>
+                    <a href="../Users/userSuspend/{{ user.user_id }}">{{ user.email }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-info">
+                <strong>Merci de vous connecter </strong>
+            </div>
+        {% endif %}
+    {% endblock %}
+
