@@ -49,10 +49,17 @@ class Post
     public function getContent($id)
     {
         $id = $id[2];
-        $req = $this->bdd->prepare('SELECT * FROM post  where id =:id');
+        $req = $this->bdd->prepare(
+            'SELECT post.id, post.title, post.chapo, post.content, post.last_update, post.user_id,
+ comment.comment, comment.comment_date, comment.status, comment.user_id, comment.post_id, user.lastname FROM post
+   LEFT JOIN comment ON 
+   post.id = comment.post_id
+   INNER  JOIN user ON 
+   comment.user_id = user.id
+   where post.id =:id AND comment.status = 1');
         $req->bindValue(':id',$id,PDO::PARAM_STR);
         $req->execute();
-        $data = $req->fetch();
+        $data = $req->fetchAll();
         return $data;
     }
 
