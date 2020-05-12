@@ -26,7 +26,7 @@ class User
     {
 
         $req = $this->bdd->prepare(
-            'SELECT user.id, user.pwd, user.firstname, user.lastname, user.role_id, status.status, email.email, email.suspend FROM user 
+            'SELECT user.id, user.pwd, user.firstname, user.lastname, user.role_id,user.status_id, status.status, email.email, email.suspend FROM user 
                       INNER JOIN email on user.id = email.user_id
                       INNER JOIN status on status.id = user.status_id
                       WHERE email =:email;');
@@ -38,6 +38,7 @@ class User
         $d = array(
             'valid' => $valid,
             'role' => $check['role_id'],
+            'status_id'=>$check['status_id'],
             'status' => $check['status'],
             'suspend' => $check['suspend'],
             'email' => $check['email'],
@@ -99,7 +100,7 @@ class User
         $pwd = $_POST['pwd'];
         $pwd = password_hash($pwd, PASSWORD_DEFAULT);
         $email = $_POST['email'];
-        $q = $this->bdd->prepare("SELECT id FROM status WHERE status = 0");
+        $q = $this->bdd->prepare("SELECT id FROM status WHERE status = 1");
         $q->execute();
         $status_id = $q->fetch();
         $status_id = intval($status_id['id']);
@@ -162,3 +163,4 @@ class User
         }
     }
 }
+
