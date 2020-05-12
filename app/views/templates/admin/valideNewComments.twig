@@ -1,0 +1,36 @@
+{% extends 'basic_template.twig' %}
+{% block content %}
+    {% if role == 1 %}
+        <form  method="POST" action="../Users/validateComments">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Commentaires </th>
+                <th>email </th>
+                <th>Valider</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for comment in list %}
+                    <tr>
+                        <td>{{ comment.comment_date }}   </td>
+                        <td>{{ comment.comment }}</td>
+                        <td>{{ comment.email }}</td>
+                        <td>
+                            <div class="checkbox">
+                                <input type="checkbox" value="{{ comment.id }}" name="tab[]">
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            <input type="submit" name="submit" class="btn btn-primary" value="Envoyer">
+        </form>
+    {% else %}
+        <div class="alert alert-info">
+            <strong>Merci de vous connecter </strong>
+        </div>
+    {% endif %}
+{% endblock %}
