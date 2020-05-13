@@ -10,6 +10,6 @@ class Homes extends Acme\Controller
    {
        session_start();
        $twig = parent::twig();
-       echo $twig->render('home\index.twig', array('active'=>$_SESSION['active']));
+       echo $twig->render('home\index.twig', array('active'=>$_SESSION['active'], 'role'=>$_SESSION['role']));
    }
 }
