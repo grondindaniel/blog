@@ -37,6 +37,16 @@ class Users extends Acme\Controller
     }
 
     /*
+     * method for for suspend an user
+    */
+    public function suspend()
+    {
+        $user_id = $_POST['user_id'];
+        $suspend = $_POST['suspend'];
+        parent::model('User')->suspend($user_id, $suspend);
+    }
+
+    /*
     *
     * register method
     * for access the page
@@ -91,7 +101,7 @@ class Users extends Acme\Controller
         {
             echo $twig->render('admin\login.twig', array('msg'=>'error'));
         }
-        elseif ($data['status'] === false)
+        elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status_id']) == 2 && intval($data['suspend'])== 0)
         {
             echo $twig->render('admin\login.twig', array('status'=>'error'));
         }

@@ -120,6 +120,7 @@ class User
         $q->execute();
         $status_id = $q->fetch();
         $status_id = intval($status_id['id']);
+        $suspend = 0;
 
         $query = $this->bdd->prepare("SELECT id FROM role WHERE role = 'user'");
         $query->execute();
@@ -136,10 +137,11 @@ class User
         ));
 
         $user_id = $this->bdd->lastInsertId();
-        $req = $this->bdd->prepare("INSERT INTO email (user_id, email) VALUES (:user_id, :email)");
+        $req = $this->bdd->prepare("INSERT INTO email (user_id, email, suspend) VALUES (:user_id, :email, :suspend)");
         $req->execute(array(
             ':user_id'=>$user_id,
-            ':email'=>$email
+            ':email'=>$email,
+            ':suspend'=>$suspend
         ));
     }
 
@@ -206,6 +208,20 @@ class User
         $req->bindValue(':id',$id,PDO::PARAM_INT);
         $req->execute();
         return $req->fetch();
+    }
+
+    /*
+     * suspend an user
+     */
+    public function suspend($user_id, $suspend)
+    {
+        $user_id = intval($user_id);
+        $req = $this->bdd->prepare("UPDATE email SET suspend=:suspend WHERE user_id=:user_id");
+        $req->bindValue(':user_id',$user_id,PDO::PARAM_INT);
+        $req->execute(array(
+            ':user_id'=>$user_id,
+            ':suspend'=>$suspend
+        ));
     }
 }
 

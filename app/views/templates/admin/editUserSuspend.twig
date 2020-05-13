@@ -9,16 +9,16 @@
                 <i class="fas fa-comment"></i> : {{ user.comment }} posté le : {{ user.comment_date | date("d/m/y à H:i:s") }}<br>
                 <hr>
                 Suspendre le compte: <input type="checkbox" id="myCheck"  onclick="myFunction()">
-
+                <form method="post" action="../../Users/suspend">
                 <p id="text" style="display:none">
                     <br>
-                    <input type="checkbox" class="form-check-input" value="1"> Cocher pour suspendre
+
+                    <input type="checkbox" name="suspend" class="form-check-input" value="1"> Cocher pour suspendre
+                    <input type="hidden" name="user_id" value="{{ user.user_id }}">
                     <br>
                     <input type="submit"  value="Suspendre" class="btn btn-danger">
                 </p>
-
-
-
+                </form>
             {% else %}
                 <div class="alert alert-info">
                     <strong>Merci de vous connecter </strong>
