@@ -1,0 +1,17 @@
+{% extends 'basic_template.twig' %}
+
+    {% block content %}
+
+       {% if message == 'valid' %}
+
+        <div class="alert alert-success" role="alert">
+            Un email pour changer votre mot de passe vous a été envoyé.
+        </div>
+
+        {% else %}
+        <div class="alert alert-danger" role="alert">
+            Cette adresse mail est inconnue. Merci d'utiliser le formulaire de contact pour joindre l'administrateur
+        </div>
+    {% endif %}
+    {% endblock %}
+
