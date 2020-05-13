@@ -25,9 +25,12 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="Posts/index">blog</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">Contact</a></li>
-                {% if active == false %}
+                {% if active != true %}
                     <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="Users/register">S'inscrire</a></li>
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="Users/login">Se connecter</a></li>
+                {% elseif active == true and role == 2 %}
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Users/editAccount">Mon compte</a></li>
+                    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="../Users/destroy">Se déconnecter</a></li>
                 {% else %}
                 <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="Users/destroy">Se déconnecter</a></li>
                 {% endif %}
