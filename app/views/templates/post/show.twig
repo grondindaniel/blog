@@ -6,7 +6,6 @@
             <h4>{{ content.0.title | raw }}</h4>
         {% endautoescape %}
     {% endblock %}
-
     {% block detailPost %}
         <div class="well well-lg">
             {% autoescape %}
@@ -18,7 +17,7 @@
                 {{ content.0.content | raw }} <br>
             {% endautoescape %}
             <hr>
-            <a href="#demo" class="comment-right" data-toggle="collapse"> 2 commentaires <i class="far fa-comment"></i></a>
+            <a href="#demo" class="comment-right" data-toggle="collapse">Commentaires <i class="far fa-comment"></i></a>
             {% if role == 1 or role == 2 %}
             <a href="#demo" data-toggle="collapse">Commenter</a>
             {% else %}
@@ -26,17 +25,19 @@
             {% endif %}
             <div id="demo" class="collapse">
                 {% for comment in content %}
-
+                    {% if comment.status == 1 %}
                     <div class="alert alert-secondary" role="alert">
+
                     {{ comment.lastname }} a commenté : <br>
                     {{ comment.comment }}
-                    </div>
 
+                    </div>
+                    {% endif %}
                 {% endfor %}
                 {% if role == 1 or role == 2 %}
                     <div class="form-group">
                         <hr>
-                        <label for="comment"><strong>Votre commentaire :</strong></label>
+                        <label for="comment"><strong>Votre commentaire : (Il sera publié après validation)</strong></label>
                         <form method="post" action="../../Comments/add">
                         <textarea class="form-control" rows="5" name="comment" placeholder="Merci de saisir votre commentaire" required></textarea>
                             <input type="hidden" name="post_id" value="{{ content.0.id }}">
@@ -50,10 +51,14 @@
             <a href="..\..\Posts\editPost\{{ content.0.id }}">
         <button type="button" class="btn btn-outline-warning">Modifier</button>
             </a>
+
             <form method="POST" action="../../Posts/destroyPost">
-            <input type="hidden" name="id" value="{{ content.0.id }}">
-            <button type="submit" class="btn btn-outline-danger">Supprimer</button>
+                Cocher pour supprimer <button type="button" class="btn btn-danger" style="width: 40px; height: 40px;"><input type="checkbox" id="myCheck"  onclick="myFunction()"></button>
+            <p id="text" style="display:none">
+                    <input type="hidden" name="id" value="{{ content.0.id }}">
+                    <button type="submit" class="btn btn-outline-danger">Supprimer</button>
             </form>
+            </p>
         {% endif %}
     {% endblock %}
 {% endblock %}
