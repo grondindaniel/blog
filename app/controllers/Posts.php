@@ -43,7 +43,7 @@ class Posts extends Acme\Controller
     public function destroyPost($id)
     {
         $id = $_POST['id'];
-        parent::model('Post')->destroyPost($id);
+        $d = parent::model('Post')->destroyPost($id);
     }
 
     /*
@@ -73,9 +73,10 @@ class Posts extends Acme\Controller
      */
     public function index()
     {
+        session_start();
         $data = parent::model('Post')->getPosts();
         $twig = parent::twig();
-        echo $twig->render('post\index.twig', array('data'=>$data));
+        echo $twig->render('post\index.twig', array('data'=>$data, 'active'=>$_SESSION['active']));
     }
 
     /*
@@ -86,7 +87,7 @@ class Posts extends Acme\Controller
         session_start();
         $data = parent::model('Post')->getContent($id);
         $twig = parent::twig();
-        echo $twig->render('post\show.twig', array('content'=>$data,'role'=>$_SESSION['role']));
+        echo $twig->render('post\show.twig', array('content'=>$data,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
     }
 
 }

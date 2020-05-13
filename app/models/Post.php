@@ -54,10 +54,10 @@ class Post
  comment.comment, comment.comment_date, comment.status, comment.user_id, comment.post_id, user.lastname FROM post
    LEFT JOIN comment ON 
    post.id = comment.post_id
-   INNER  JOIN user ON 
+   LEFT JOIN user ON 
    comment.user_id = user.id
-   where post.id =:id AND comment.status = 1');
-        $req->bindValue(':id',$id,PDO::PARAM_STR);
+   where post.id =:id');
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
         $req->execute();
         $data = $req->fetchAll();
         return $data;
@@ -90,11 +90,12 @@ class Post
     public function destroyPost($id)
     {
         $id = intval($id);
-        $req = $this->bdd->prepare("DELETE FROM post  WHERE id=:id");
+        $req = $this->bdd->prepare("DELETE FROM post WHERE id=:id");
         $req->bindValue(':id',$id,PDO::PARAM_INT);
-        $req->execute(array(
-            ':id'=>$id
-        ));
+        $req->execute();
+        $req = $this->bdd->prepare("DELETE FROM comment WHERE post_id=:id");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute();
     }
 }
 

@@ -139,6 +139,7 @@ class Users extends Acme\Controller
                 'firstname'=>$_SESSION['firstname'],
                 'lastname'=>$_SESSION['lastname'],
                 'email'=>$_SESSION['email'],
+                'active'=>$_SESSION['active'],
                 'id'=>intval($_SESSION['id'])));
     }
 
@@ -251,6 +252,16 @@ class Users extends Acme\Controller
     {
         $twig = parent::twig();
         echo $twig->render('user\passwordForgot.twig', array());
+    }
+
+    /*
+     * user home page method
+     */
+    public function userHomePage()
+    {
+        session_start();
+        $twig = parent::twig();
+        echo $twig->render('user\index.twig', array('role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
     }
 
     /*
