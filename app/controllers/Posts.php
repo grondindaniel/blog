@@ -43,7 +43,7 @@ class Posts extends Acme\Controller
     public function destroyPost($id)
     {
         $id = $_POST['id'];
-        $d = parent::model('Post')->destroyPost($id);
+        parent::model('Post')->destroyPost($id);
     }
 
     /*
