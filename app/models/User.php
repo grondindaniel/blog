@@ -50,6 +50,22 @@ class User
     }
 
     /*
+     * Check email
+     */
+    public function chekedEmail($email)
+    {
+        $req = $this->bdd->prepare(
+            'SELECT email.email FROM email WHERE email =:email');
+        $req->bindValue(':email', $email, PDO::PARAM_STR);
+        $req->execute();
+        $check = $req->fetch();
+        $d = array(
+            'email' => $check['email']
+        );
+        return $d;
+    }
+
+    /*
      * Edit identity
      */
     public function editUser($id, $firstname, $lastname)

@@ -233,5 +233,40 @@ class Users extends Acme\Controller
         $tab = $_POST['tab'];
         parent::model('Comment')->changeStatus($tab);
     }
+
+    /*
+     * form for password forgot
+     */
+    public function passwordForgot()
+    {
+        $twig = parent::twig();
+        echo $twig->render('user\passwordForgot.twig', array());
+    }
+
+    /*
+     * Method to send a link for change password
+     */
+    public function mailPasswordForgot()
+    {
+        $email = $_POST['email'];
+        $d = parent::model('User')->chekedEmail($email);
+
+        if($d['email'] == $email)
+        {
+            $from = $email;
+            $to = $email;
+            $subject = "Modification mot de passe";
+            $message = "PHP mail marche";
+            $headers = "From:" . $from;
+            mail($to,$subject,$message, $headers);
+            $twig = parent::twig();
+            echo $twig->render('user\sendMessage.twig',array('message'=>'valid'));
+        }
+        else
+        {
+            $twig = parent::twig();
+            echo $twig->render('user\sendMessage.twig',array('message'=>'invalid'));
+        }
+    }
 }
 
