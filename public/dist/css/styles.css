@@ -10235,7 +10235,7 @@ form .row:first-child .floating-label-form-group {
   padding: 10px;
 }
 .formulaire2{
-  width: 100%;
+  width: 60%;
   height: 380px;
   margin: auto;
   position: relative;
@@ -10384,8 +10384,10 @@ input[type=submit] {
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 100%;
+  width: 60%;
   margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card:hover {
@@ -10419,3 +10421,6 @@ li{
   display: block
 }
 
+.img-fluid{
+  max-width: 70%;
+}

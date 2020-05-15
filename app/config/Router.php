@@ -45,7 +45,9 @@ class Router
             $twig = new \Twig\Environment($loader, []);
             $loader->addPath('public/dist/css/','css');
             $loader->addPath('public/dist/assets/img/','img');
-            echo $twig->render('home\index.twig', array('active'=>$_SESSION['active']));
+            $_SESSION['active'] = isset($_SESSION['active']) ? $_SESSION['active'] : NULL;
+            $_SESSION['role'] = isset($_SESSION['role']) ? $_SESSION['role'] : NULL;
+            echo $twig->render('home\index.twig', array('active'=>$_SESSION['active'],'role'=>$_SESSION['role']));
         }
     }
     /*

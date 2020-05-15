@@ -76,7 +76,9 @@ class Posts extends Acme\Controller
         session_start();
         $data = parent::model('Post')->getPosts();
         $twig = parent::twig();
-        echo $twig->render('post\index.twig', array('data'=>$data, 'active'=>$_SESSION['active']));
+        $_SESSION['active'] = isset($_SESSION['active']) ? $_SESSION['active'] : NULL;
+        $_SESSION['role'] = isset($_SESSION['role']) ? $_SESSION['role'] : NULL;
+        echo $twig->render('post\index.twig', array('data'=>$data,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
     }
 
     /*
