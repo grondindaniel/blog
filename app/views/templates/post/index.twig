@@ -1,7 +1,14 @@
-{% extends 'basic_template.twig' %}
+
 
 {% block content %}
 
+    {% if role == 2 %}
+        {% include 'basic_template_2.twig' %}
+    {% elseif role == 1 %}
+        {% include 'home_template.twig' %}
+    {% else  %}
+        {% include 'basic_template.twig' %}
+    {% endif %}
     <ul>
     {% for post in data %}
         <li>
@@ -24,4 +31,6 @@
     </ul>
 
 {% endblock %}
+
+{% include 'footer.twig' %}
 

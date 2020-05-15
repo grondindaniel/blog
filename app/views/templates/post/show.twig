@@ -1,6 +1,12 @@
-{% extends 'basic_template_2.twig' %}
-
+{% extends 'head3.twig' %}
 {% block content %}
+    {% block nav3 %}
+        {% if role == 1 %}
+            {% include 'ha2.twig' %}
+        {% else %}
+            {% include 'h3.twig' %}
+        {% endif %}
+    {% endblock %}
     {% block titlePost %}
         {% autoescape %}
             <h4>{{ content.0.title | raw }}</h4>

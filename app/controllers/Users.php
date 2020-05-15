@@ -99,15 +99,15 @@ class Users extends Acme\Controller
         }
         elseif ($data['valid'] === false)
         {
-            echo $twig->render('admin\login.twig', array('msg'=>'error'));
+            echo $twig->render('login.twig', array('msg'=>'error'));
         }
         elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status_id']) == 2 && intval($data['suspend'])== 0)
         {
-            echo $twig->render('admin\login.twig', array('status'=>'error'));
+            echo $twig->render('login.twig', array('status'=>'error'));
         }
         else
         {
-            echo $twig->render('admin\login.twig', array('suspend'=>'true'));
+            echo $twig->render('login.twig', array('suspend'=>'true'));
         }
     }
 
@@ -150,7 +150,7 @@ class Users extends Acme\Controller
     {
         session_start();
         $twig = parent::twig();
-        echo $twig->render('admin\changePwd.twig', array('role'=>$_SESSION['role']));
+        echo $twig->render('admin\changePwd.twig', array('role'=>$_SESSION['role'],'active'=>$_SESSION['active']));
     }
 
     /*
@@ -288,6 +288,17 @@ class Users extends Acme\Controller
             $twig = parent::twig();
             echo $twig->render('user\sendMessage.twig',array('message'=>'invalid'));
         }
+    }
+
+    public function indexHome()
+    {
+        session_start();
+        $twig = parent::twig();
+        $nbNewUsers = self::nbUsersWaitingForValidation();
+        $nbNewComments = self::nbCommentsWaitingForValidation();
+        $_SESSION['active'] = true;
+        echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments));
+
     }
 }
 

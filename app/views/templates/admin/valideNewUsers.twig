@@ -1,4 +1,4 @@
-{% extends 'basic_template.twig' %}
+{% extends 'admin_template.twig' %}
 {% block content %}
     {% if role == 1 %}
         <form  method="POST" action="../Users/validateUsers">
@@ -7,6 +7,7 @@
         <tr>
             <th>Prénom</th>
             <th>Nom </th>
+            <th>Email</th>
             <th>Valider</th>
         </tr>
         </thead>
@@ -15,6 +16,7 @@
             <tr>
                 <td>{{ user.firstname }}   </td>
                 <td>{{ user.lastname }}</td>
+                <td>{{ user.email }}</td>
                 <td>
                     <div class="checkbox">
                         <input type="checkbox" value="{{ user.id }}" name="tab[]">

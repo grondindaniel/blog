@@ -1,5 +1,9 @@
 
-{% extends 'basic_template.twig' %}
+{% if role == 1 %}
+ {% include 'admin_template.twig' %}
+{% else %}
+{% include 'basic_template.twig' %}
+{% endif %}
 
     {% block content %}
 
