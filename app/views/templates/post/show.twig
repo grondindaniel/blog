@@ -23,6 +23,8 @@
             {% autoescape %}
                 {{ content.0.content | raw }} <br>
             {% endautoescape %}
+            Auteur : {{ content.0.author | raw }} <br>
+            Date de mise à jour : {{ content.0.last_update | date('d/m/Y H:i:s') }} <br>
             <hr>
             <a href="#demo" class="comment-right" data-toggle="collapse">Commentaires <i class="far fa-comment"></i></a>
             {% if role == 1 or role == 2 %}

@@ -35,6 +35,8 @@
                 <strong>Merci de vous connecter </strong> pour créer un post.
             </div>
         {% endif %}
-        {% include 'footer.twig' %}
+        {% if role == 1 %}
+            {% include 'footer.twig' %}
+        {% endif %}
     {% endblock %}
 

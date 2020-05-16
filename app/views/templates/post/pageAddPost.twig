@@ -1,11 +1,9 @@
  {% extends 'admin_template.twig' %}
 
     {% block content %}
-
         {% if role == 1 %}
         <h1>Créer votre post</h1>
         <hr>
-
         <form method="POST" action="../Posts/addPost">
             <h4>Titre du post</h4>
             <input type="text" id="title" name="title">
@@ -18,11 +16,12 @@
             <hr>
             <input type="submit" name="submit" class="btn btn-primary" value="Envoyer">
         </form>
+
             {% else %}
                 <div class="alert alert-info">
                     <strong>Merci de vous connecter </strong> pour créer un post.
                 </div>
         {% endif %}
-{% include 'footer.twig' %}
+
     {% endblock %}
 
