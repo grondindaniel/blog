@@ -2,6 +2,11 @@
 {% block content %}
 <div class="valideUser">
     {% if role == 1 %}
+        {% if msg == 'ok' %}
+            <div class="alert alert-success">
+                <strong>Commentaire validé avec succés</strong>.
+            </div>
+        {% endif %}
         <form  method="POST" action="../Users/validateComments">
         <table class="table table-bordered">
             <thead>

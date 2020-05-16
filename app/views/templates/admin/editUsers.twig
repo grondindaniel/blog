@@ -3,6 +3,15 @@
     {% block content %}
 <div class="valideUser">
         {% if role == 1 %}
+            {% if msg == 'ok' %}
+                <div class="alert alert-success">
+                    <strong>Utilisateur suspendu avec succés</strong>.
+                </div>
+                {% elseif reactive == 'ok' %}
+                    <div class="alert alert-success">
+                        <strong>Utilisateur réactivé avec succés</strong>.
+                    </div>
+            {% endif %}
             <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Saisir l'email..." title="Type in a name">
             <ul id="myUL">
                 {% for user in users %}
