@@ -126,14 +126,15 @@ class User
         $query->execute();
         $role_id = $query->fetch();
         $role_id = intval($role_id['id']);
-
-        $req = $this->bdd->prepare("INSERT INTO user (role_id, firstname, lastname, pwd, status_id) VALUES (:role_id ,:firstname, :lastname, :pwd, :status_id)");
+        $date_register = date("Y-m-d H:i:s");
+        $req = $this->bdd->prepare("INSERT INTO user (role_id, firstname, lastname, pwd, status_id, date_register) VALUES (:role_id ,:firstname, :lastname, :pwd, :status_id, :date_register)");
         $req->execute(array(
             ':role_id'=>$role_id,
             ':firstname'=>$firstname,
             ':lastname'=>$lastname,
             ':pwd'=>$pwd,
-            ':status_id'=>$status_id
+            ':status_id'=>$status_id,
+            ':date_register'=>$date_register
         ));
 
         $user_id = $this->bdd->lastInsertId();
@@ -162,10 +163,25 @@ class User
      */
     public function listWaitingUsers()
     {
-        $req = $this->bdd->prepare("SELECT user.firstname, user.lastname, user.id FROM user WHERE status_id = 2");
+        $req = $this->bdd->prepare("SELECT user.firstname, user.lastname, user.id, email.email FROM user
+ inner JOIN email on 
+ email.user_id = user.id
+ WHERE user.status_id = 2");
         $req->execute();
         $d = $req->fetchAll();
         return $d;
+    }
+
+    /*
+     * liste users who are waiting validation
+     */
+    public function nbUsers()
+    {
+        $req = $this->bdd->prepare("SELECT user.id FROM user WHERE user.status_id = 1");
+        $req->execute();
+        $u = $req->fetchAll();
+        $u = count($u);
+        return $u;
     }
 
     /*

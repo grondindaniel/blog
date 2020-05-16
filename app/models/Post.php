@@ -22,13 +22,13 @@ class Post
     /*
      * Function for insert post to post table
      */
-    public function addPost(string $title, string $chapo, string $content)
+    public function addPost(string $title, string $chapo, string $content, string $author)
     {
-        session_start();
+
         $user_id = $_SESSION['id'];
         $last_update = date("Y-m-d H:i:s");
-        $req = $this->bdd->prepare("INSERT INTO post (title,chapo,content,last_update,user_id) VALUES (:title,:chapo,:content,:last_update,:user_id)");
-        $req->execute(array(':title'=>$title,':chapo'=>$chapo,':content'=>$content,':last_update'=>$last_update,':user_id'=>$user_id));
+        $req = $this->bdd->prepare("INSERT INTO post (title,chapo,content,last_update,user_id, author) VALUES (:title,:chapo,:content,:last_update,:user_id, :author)");
+        $req->execute(array(':title'=>$title,':chapo'=>$chapo,':content'=>$content,':last_update'=>$last_update,':user_id'=>$user_id, ':author'=>$author));
         return true;
     }
 
@@ -50,7 +50,7 @@ class Post
     {
         $id = $id[2];
         $req = $this->bdd->prepare(
-            'SELECT post.id, post.title, post.chapo, post.content, post.last_update, post.user_id,
+            'SELECT post.id, post.title, post.chapo, post.content, post.last_update, post.user_id, post.author,
  comment.comment, comment.comment_date, comment.status, comment.user_id, comment.post_id, user.lastname FROM post
    LEFT JOIN comment ON 
    post.id = comment.post_id
@@ -66,21 +66,23 @@ class Post
     /*
     * get data for display content
     */
-    public function changePost($id, $title, $chapo, $content)
+    public function changePost($id, $title, $chapo, $content, $author)
     {
         $id = intval($_POST['id']);
         $title = $_POST['title'];
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
+        $author = $_POST['author'];
         $last_update = date("Y-m-d H:i:s");
-        $req = $this->bdd->prepare("UPDATE post SET id=:id, title=:title, chapo=:chapo, content=:content, last_update=:last_update WHERE id=:id");
+        $req = $this->bdd->prepare("UPDATE post SET id=:id, title=:title, chapo=:chapo, content=:content, last_update=:last_update, author=:author WHERE id=:id");
         $req->bindValue(':id',$id,PDO::PARAM_INT);
         $req->execute(array(
             ':id'=>$id,
             ':title'=>$title,
             ':chapo'=>$chapo,
             ':content'=>$content,
-            ':last_update'=>$last_update
+            ':last_update'=>$last_update,
+            ':author'=>$author
         ));
     }
 
