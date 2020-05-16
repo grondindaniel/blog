@@ -1,14 +1,13 @@
-
+{% if role == 2 %}
+    {% include 'basic_template_2.twig' %}
+{% elseif role == 1 %}
+    {% include 'home_template.twig' %}
+{% else  %}
+    {% include 'basic_template.twig' %}
+{% endif %}
 
 {% block content %}
-
-    {% if role == 2 %}
-        {% include 'basic_template_2.twig' %}
-    {% elseif role == 1 %}
-        {% include 'home_template.twig' %}
-    {% else  %}
-        {% include 'basic_template.twig' %}
-    {% endif %}
+<div id="card_index">
     <ul>
     {% for post in data %}
         <li>
@@ -16,7 +15,7 @@
                 {% autoescape %}
                     <div class="post_tilte"> {{ post.title | raw }} </div>
                 {% endautoescape %}
-                <div class="container" style="max-width:100%">
+                <div class="container">
                     {% autoescape %}
                         <p> {{ post.chapo | u.truncate(200, '...') | raw }} </p>
                         <a href="../Posts/show/{{ post.id }}">Lire la suite</a>
@@ -29,7 +28,7 @@
         </li>
     {% endfor %}
     </ul>
-
+</div>
 {% endblock %}
 
 {% include 'footer.twig' %}

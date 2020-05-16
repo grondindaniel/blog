@@ -1,6 +1,5 @@
 {% extends 'head3.twig' %}
 {% block content %}
-    {{ dump() }}
     {% block nav3 %}
         {% if role == 1 %}
             {% include 'ha2.twig' %}
@@ -8,6 +7,7 @@
             {% include 'h3.twig' %}
         {% endif %}
     {% endblock %}
+<div class="card">
     {% block titlePost %}
         {% autoescape %}
             <h4>{{ content.0.title | raw }}</h4>
@@ -68,5 +68,6 @@
             </p>
         {% endif %}
     {% endblock %}
+</div>
 {% endblock %}
 
