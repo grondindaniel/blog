@@ -25,32 +25,29 @@
     </style>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', {'packages':['corechart']});
+        google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Year', 'Utilisateurs', 'Commentaires'],
-                ['Mars',  10,      5],
-                ['Avril',  23,      6],
-                ['Mai',  11,       2],
-                ['Juin',  8,      1]
+                ['', 'Utilisateurs', 'Commentaires'],
+                ['_',{{ totalUsers }}, {{ nbComments }}]
             ]);
 
             var options = {
-                title: 'Stats : Inscriptions / Commentaires',
-                curveType: 'function',
-                legend: { position: 'bottom' }
+                chart: {
+                    title: 'Nombre de d\'utilisateurs',
+                    subtitle: 'Nombre de commentaires',
+                }
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-            chart.draw(data, options);
+            chart.draw(data, google.charts.Bar.convertOptions(options));
         }
     </script>
 </head>
 <body>
-
 <nav class="navbar navbar-inverse visible-xs">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -64,6 +61,8 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Dashboard</a></li>
+                <li class="alert alert-success" style="background-color: tomato;"><a href="../Users/destroy" style="color: #FFFFFF;"><i class="fas fa-home"></i> SE DECONNECTER{{ nbUsers }}</a></li>
+                <li class="alert alert-success" style="background-color: tomato;"><a href="../Users/editAccount" style="color: #FFFFFF;"><i class="fas fa-user-cog"></i> MON COMPTE</a></li>
 
             </ul>
         </div>
@@ -82,9 +81,9 @@
         <br>
 
         <div class="col-sm-9">
-            <div class="well">
-                <p> <div id="curve_chart" style="width: 900px; height: 500px; margin: auto;"></div></p>
-            </div>
+                <div class="well">
+                <div id="columnchart_material" style="margin: auto;"></div>
+                </div>
             <div class="row">
                 <div class="col-sm-4">
                     <div class="well">
