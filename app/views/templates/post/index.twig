@@ -17,7 +17,7 @@
                 {% endautoescape %}
                 <div class="container">
                     {% autoescape %}
-                        <p> {{ post.chapo | u.truncate(200, '...') | raw }} </p>
+                        <p> {{ post.chapo | u.truncate(400, '...') | raw }} </p>
                         <a href="../Posts/show/{{ post.id }}">Lire la suite</a>
                     {% endautoescape %}
                     <br>
