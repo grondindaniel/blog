@@ -43,6 +43,18 @@ class Comment
     }
 
     /*
+     * listing of comments not validated
+     */
+    public function nbComments()
+    {
+        $req = $this->bdd->prepare("SELECT * FROM comment WHERE status = 1");
+        $req->execute();
+        $nb = $req->fetchAll();
+        $nb = count($nb);
+        return $nb;
+    }
+
+    /*
      * listing of comments who are validated
      */
     public function listWaitingCommentsForValidation()
