@@ -476,7 +476,7 @@ mark,
 }
 
 .img-fluid {
-  max-width: 100%;
+  max-width: 80%;
   height: auto;
 }
 
@@ -10157,7 +10157,7 @@ h3 {
 
 .floating-label-form-group {
   position: relative;
-  border-bottom: 1px solid #e9ecef;
+  border-bottom: 0px solid #e9ecef;
 }
 .floating-label-form-group input,
 .floating-label-form-group textarea {
@@ -10212,9 +10212,10 @@ form .row:first-child .floating-label-form-group {
   background-color: #1a252f;
 }
 .page{
-  position: relative;
   margin-top: 150px;
+
 }
+
 .footer_bottom{
   position: relative;
   bottom: 0px;
@@ -10226,7 +10227,7 @@ form .row:first-child .floating-label-form-group {
 
 
 .formulaire{
-  width: 40%;
+  width: 80%;
   height: 320px;
   margin: auto;
   position: relative;
@@ -10235,7 +10236,7 @@ form .row:first-child .floating-label-form-group {
   padding: 10px;
 }
 .formulaire2{
-  width: 100%;
+  width: 80%;
   height: 380px;
   margin: auto;
   position: relative;
@@ -10252,7 +10253,18 @@ form .row:first-child .floating-label-form-group {
 }
 
 
-input[type=text],input[type=email], input[type=password] {
+input[type=text],input[type=email],input[type=tel], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  box-sizing: border-box;
+}
+#message{
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -10384,8 +10396,12 @@ input[type=submit] {
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 100%;
+  width:80%;
   margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 3px;
+
 }
 
 .card:hover {
@@ -10418,4 +10434,32 @@ li{
   color: black;
   display: block
 }
+.container_post{
+  background-color: red;
+  display: flex;
+  justify-content: center;
+}
 
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 0px;
+}
+
+#card_index{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media only screen and (max-width: 380px) {
+
+  .form-group {
+    font-size: 12px;
+  }
+
+}
