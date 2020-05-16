@@ -10455,11 +10455,32 @@ ul {
   margin-left: auto;
   margin-right: auto;
 }
+#curve_chart{
+  width: 100%;
+  height: 100%;
+}
+.valideUser{
+  width: 90%;
+  margin: auto;
+}
 
 @media only screen and (max-width: 380px) {
 
   .form-group {
     font-size: 12px;
   }
+
+  .img-fluid{
+    padding-left: 70px;
+  }
+
+  #card_index{
+    width: 100%;
+  }
+
+  .card{
+    width: 100%;
+  }
+
 
 }
