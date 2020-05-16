@@ -14,12 +14,12 @@
         {% endautoescape %}
     {% endblock %}
     {% block detailPost %}
-        <div class="well well-lg">
+
             {% autoescape %}
                 {{ content.0.chapo | raw }} <br>
             {% endautoescape %}
-        </div>
-        <div class="well well-lg">
+
+
             {% autoescape %}
                 {{ content.0.content | raw }} <br>
             {% endautoescape %}
@@ -70,6 +70,6 @@
             </p>
         {% endif %}
     {% endblock %}
-</div>
+
 {% endblock %}
 
