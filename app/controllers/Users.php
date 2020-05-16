@@ -82,6 +82,8 @@ class Users extends Acme\Controller
         $twig = parent::twig();
         $nbNewUsers = self::nbUsersWaitingForValidation();
         $nbNewComments = self::nbCommentsWaitingForValidation();
+        $nbComments = self::nbComments();
+        $totalUsers = self::nbUsers();
         $_SESSION['role'] = $data['role'];
         $_SESSION['email'] = $data['email'];
         $_SESSION['firstname'] = $data['firstname'];
@@ -90,7 +92,7 @@ class Users extends Acme\Controller
         if($data['valid'] === true && intval($data['role']) == 1)
         {
             $_SESSION['active'] = true;
-            echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments));
+            echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments, 'totalUsers'=>$totalUsers,'nbComments'=>$nbComments));
         }
         elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status_id']) == 1 && intval($data['suspend'])== 0)
         {
@@ -99,15 +101,18 @@ class Users extends Acme\Controller
         }
         elseif ($data['valid'] === false)
         {
-            echo $twig->render('login.twig', array('msg'=>'error'));
+            session_destroy();
+            echo $twig->render('admin\login.twig', array('msg'=>'error'));
         }
         elseif ($data['valid'] === true && $data['role'] == '2' && intval($data['status_id']) == 2 && intval($data['suspend'])== 0)
         {
-            echo $twig->render('login.twig', array('status'=>'error'));
+            session_destroy();
+            echo $twig->render('admin\login.twig', array('status'=>'error'));
         }
         else
         {
-            echo $twig->render('login.twig', array('suspend'=>'true'));
+            session_destroy();
+            echo $twig->render('admin\login.twig', array('suspend'=>'true'));
         }
     }
 
@@ -194,12 +199,32 @@ class Users extends Acme\Controller
     }
 
     /*
+     * check how many users
+     * are waiting for registration
+     */
+    public function nbUsers()
+    {
+        $n = parent::model('User')->nbUsers();
+        return $n;
+    }
+
+    /*
      * check how many comments
      * are waiting for registration
      */
     public function nbCommentsWaitingForValidation()
     {
         $n = parent::model('Comment')->listWaitingComments();
+        return $n;
+    }
+
+    /*
+     * check how many comments
+     * are waiting for registration
+     */
+    public function nbComments()
+    {
+        $n = parent::model('Comment')->nbComments();
         return $n;
     }
 
@@ -232,9 +257,15 @@ class Users extends Acme\Controller
      */
     public function validateUsers()
     {
+        session_start();
         $tab = $_POST['tab'];
+        $nbNewUsers = self::nbUsersWaitingForValidation();
+        $nbNewComments = self::nbCommentsWaitingForValidation();
         parent::model('User')->changeStatus($tab);
+        $twig = parent::twig();
+        echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments));
     }
+
 
     /*
      * Validate comments
@@ -262,6 +293,16 @@ class Users extends Acme\Controller
         session_start();
         $twig = parent::twig();
         echo $twig->render('user\index.twig', array('role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
+    }
+
+    /*
+     * user home page method
+     */
+    public function mentions()
+    {
+
+        $twig = parent::twig();
+        echo $twig->render('mentions.twig', array());
     }
 
     /*

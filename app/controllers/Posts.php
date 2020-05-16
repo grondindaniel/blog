@@ -9,10 +9,12 @@ class Posts extends Acme\Controller
    */
     public function addPost()
     {
+        session_start();
+        $author = $_SESSION['lastname'];
         $title = $_POST['title'];
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
-        parent::model('Post')->addPost($title, $chapo, $content);
+        parent::model('Post')->addPost($title, $chapo, $content, $author);
     }
 
     /*
@@ -55,7 +57,8 @@ class Posts extends Acme\Controller
         $title = $_POST['title'];
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
-        parent::model('Post')->changePost($id, $title, $chapo, $content);
+        $author = $_POST['author'];
+        parent::model('Post')->changePost($id, $title, $chapo, $content, $author);
     }
 
     /*
@@ -76,6 +79,8 @@ class Posts extends Acme\Controller
         session_start();
         $data = parent::model('Post')->getPosts();
         $twig = parent::twig();
+        $_SESSION['active'] = isset($_SESSION['active']) ? $_SESSION['active'] : NULL;
+        $_SESSION['role'] = isset($_SESSION['role']) ? $_SESSION['role'] : NULL;
         echo $twig->render('post\index.twig', array('data'=>$data, 'active'=>$_SESSION['active'],'role'=>$_SESSION['role']));
     }
 
