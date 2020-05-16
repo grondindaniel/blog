@@ -1,4 +1,4 @@
-{% extends 'admin_template.twig' %}
+{% include 'admin_template.twig' %}
 {% block content %}
     {% if role == 1 %}
         <form  method="POST" action="../Users/validateComments">
@@ -33,5 +33,6 @@
             <strong>Merci de vous connecter </strong>
         </div>
     {% endif %}
+    {% include 'footer.twig' %}
 {% endblock %}
 

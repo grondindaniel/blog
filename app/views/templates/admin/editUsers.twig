@@ -1,4 +1,4 @@
-{% extends 'admin_template.twig' %}
+{% include 'admin_template.twig' %}
 
     {% block content %}
 
@@ -16,5 +16,6 @@
                 <strong>Merci de vous connecter </strong>
             </div>
         {% endif %}
+        {% include 'footer.twig' %}
     {% endblock %}
 
