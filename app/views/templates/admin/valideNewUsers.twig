@@ -1,5 +1,6 @@
 {% include 'admin_template.twig' %}
 {% block content %}
+    <div class="valideUser">
     {% if role == 1 %}
         <form  method="POST" action="../Users/validateUsers">
     <table class="table table-bordered">
@@ -28,6 +29,7 @@
     </table>
             <input type="submit" name="submit" class="btn btn-primary" value="Envoyer">
         </form>
+        </div>
     {% else %}
         <div class="alert alert-info">
             <strong>Merci de vous connecter </strong>
