@@ -67,6 +67,8 @@ class Users extends Acme\Controller
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
         parent::model('User')->addUser($firstname, $lastname,$email, $pwd);
+        $twig = parent::twig();
+        echo $twig->render('user\register.twig', array('enregistrement'=>'ok'));
     }
 
 
