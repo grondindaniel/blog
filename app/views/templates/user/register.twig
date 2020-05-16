@@ -25,7 +25,13 @@
                         <div class="g-recaptcha" data-sitekey="6LeAnC0UAAAAAGB-hJ7RGLu7p1T-llZpN3_x4494"></div>
                     </div>
                 </div>
+                {% if enregistrement == 'ok' %}
+                    <div class="alert alert-success">
+                        <strong>Merci pour votre enregistrement qui sera actif sous 24 heures</strong>.
+                    </div>
+                {% endif %}
             </form>
+
             <div id="message2">
                 <h3>Le mot de passe devrait contenir :</h3>
                 <p id="letter" class="invalid">Au minimun une <b>minuscule</b> </p>
