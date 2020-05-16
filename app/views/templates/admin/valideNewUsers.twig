@@ -3,6 +3,11 @@
     <div class="valideUser">
     {% if role == 1 %}
         <form  method="POST" action="../Users/validateUsers">
+            {% if msg == 'ok' %}
+                <div class="alert alert-success">
+                    <strong>Utilisateurs validés avec succés</strong>.
+                </div>
+            {% endif %}
     <table class="table table-bordered">
         <thead>
         <tr>

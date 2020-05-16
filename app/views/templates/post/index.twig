@@ -7,6 +7,11 @@
 {% endif %}
 
 {% block content %}
+    {% if commentOk == 'ok' %}
+        <div class="alert alert-success">
+            <strong>Commentaire envoyé avec succés, il apparaitra après validation</strong>.
+        </div>
+    {% endif %}
 <div id="card_index">
     <ul>
     {% for post in data %}

@@ -10,6 +10,15 @@
         {% if role == 1 %}
             <h1>Modifier votre post</h1>
             <hr>
+            {% if msg == 'ok' %}
+                <div class="alert alert-success">
+                    <strong>Le post a été modifié avec succés</strong>.
+                </div>
+                {% elseif deletePost == 'ok' %}
+                    <div class="alert alert-success">
+                        <strong>Post supprimé avec succés</strong>.
+                    </div>
+            {% endif %}
             <ul>
                 {% for post in data %}
                     <li>
@@ -19,7 +28,7 @@
                             {% endautoescape %}
                             <div class="container" style="max-width:100%">
                                 {% autoescape %}
-                                    <p> {{ post.chapo | u.truncate(200, '...') | raw }} </p>
+                                    <p> {{ post.chapo | u.truncate(400, '...') | raw }} </p>
                                     <a href="../Posts/show/{{ post.id }}">Lire la suite</a>
                                 {% endautoescape %}
                                 <br>
