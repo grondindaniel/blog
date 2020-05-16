@@ -15,6 +15,8 @@ class Posts extends Acme\Controller
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
         parent::model('Post')->addPost($title, $chapo, $content, $author);
+        $twig = parent::twig();
+        echo $twig->render('post\pageAddPost.twig', array('role'=>$_SESSION['role']));
     }
 
     /*
