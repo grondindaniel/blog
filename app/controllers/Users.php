@@ -37,13 +37,16 @@ class Users extends Acme\Controller
     }
 
     /*
-     * method for for suspend an user
+     * method for  suspend an user
     */
     public function suspend()
     {
+        session_start();
         $user_id = $_POST['user_id'];
         $suspend = $_POST['suspend'];
         parent::model('User')->suspend($user_id, $suspend);
+        $twig = parent::twig();
+        echo $twig->render('admin\editUsers.twig',array('role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'msg'=>'ok'));
     }
 
     /*
@@ -265,7 +268,7 @@ class Users extends Acme\Controller
         $nbNewComments = self::nbCommentsWaitingForValidation();
         parent::model('User')->changeStatus($tab);
         $twig = parent::twig();
-        echo $twig->render('admin\index.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments));
+        echo $twig->render('admin\valideNewUsers.twig', array('nombre'=>$nbNewUsers,'role'=>$_SESSION['role'], 'active'=>$_SESSION['active'], 'nbNewComments'=>$nbNewComments,'msg'=>'ok'));
     }
 
 
@@ -274,9 +277,27 @@ class Users extends Acme\Controller
      */
     public function validateComments()
     {
+        session_start();
         $tab = $_POST['tab'];
         parent::model('Comment')->changeStatus($tab);
+        $twig = parent::twig();
+        echo $twig->render('admin\valideNewComments.twig', array('role'=>$_SESSION['role'],'msg'=>'ok'));
     }
+
+    /*
+     * Reactive an user
+     */
+    public function stopSuspend()
+    {
+        session_start();
+        $suspend = $_POST['suspend'];
+        $user_id = $_POST['user_id'];
+        parent::model('User')->stopSuspend($suspend, $user_id);
+        $twig = parent::twig();
+        echo $twig->render('admin\editUsers.twig',array('role'=>$_SESSION['role'],'active'=>$_SESSION['active'],'reactive'=>'ok'));
+
+    }
+
 
     /*
      * form for password forgot

@@ -239,5 +239,18 @@ class User
             ':suspend'=>$suspend
         ));
     }
+
+    /*
+     * Stop suspend
+     */
+    public function stopSuspend($suspend, $user_id)
+    {
+        $req = $this->bdd->prepare("UPDATE email SET suspend=:suspend WHERE user_id=:user_id");
+        $req->bindValue(':user_id',$user_id,PDO::PARAM_INT);
+        $req->execute(array(
+            ':user_id'=>$user_id,
+            ':suspend'=>$suspend
+        ));
+    }
 }
 
