@@ -16,7 +16,7 @@ class Posts extends Acme\Controller
         $content = $_POST['content'];
         parent::model('Post')->addPost($title, $chapo, $content, $author);
         $twig = parent::twig();
-        echo $twig->render('post\pageAddPost.twig', array('role'=>$_SESSION['role']));
+        echo $twig->render('post\pageAddPost.twig', array('role'=>$_SESSION['role'],'msg'=>'ok'));
     }
 
     /*
@@ -46,8 +46,12 @@ class Posts extends Acme\Controller
     */
     public function destroyPost($id)
     {
+        session_start();
         $id = $_POST['id'];
         parent::model('Post')->destroyPost($id);
+        $data = parent::model('Post')->getPosts();
+        $twig = parent::twig();
+        echo $twig->render('post\editPostPage.twig', array('data'=>$data,'role'=>$_SESSION['role'],'deletePost'=>'ok','active'=>$_SESSION['active']));
     }
 
     /*
@@ -55,12 +59,15 @@ class Posts extends Acme\Controller
      */
     public function changePost()
     {
+        session_start();
         $id = $_POST['id'];
         $title = $_POST['title'];
         $chapo = $_POST['chapo'];
         $content = $_POST['content'];
         $author = $_POST['author'];
         parent::model('Post')->changePost($id, $title, $chapo, $content, $author);
+        $twig = parent::twig();
+        echo $twig->render('post\editPostPage.twig', array('role'=>$_SESSION['role'],'msg'=>'ok','active'=>$_SESSION['active']));
     }
 
     /*
