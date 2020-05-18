@@ -7,10 +7,10 @@
 
 class User
 {
-    public $host = 'localhost';
-    public $dbname = 'blog2';
-    public $user = 'root';
-    public $pwd = '';
+    public $host = 'proteifotf581.mysql.db';
+    public $dbname = 'proteifotf581';
+    public $user = 'proteifotf581';
+    public $pwd = 'Xkeyscore1977';
     public $bdd;
 
     public function __construct()
@@ -105,45 +105,83 @@ class User
         ));
     }
 
+    /*
+     * Change pwd
+     */
+    public function updatePwdMailing($email, $pwd)
+    {
+        $email =  $_POST['email'];
+        $pwd = $_POST['pwd'];
+        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        $req = $this->bdd->prepare("SELECT user_id FROM email WHERE email =:email");
+        $req->bindValue(':email',$email,PDO::PARAM_STR);
+        $req->execute();
+        $id = $req->fetch();
+        $id = intval($id['user_id']);
+        $req = $this->bdd->prepare("UPDATE user SET pwd=:pwd WHERE id=:id");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute(array(
+            ':id'=>$id,
+            ':pwd'=>$pwd
+        ));
+    }
+
 
     /*
      * register new user
      */
     public function addUser($firstname, $lastname, $pwd, $email)
     {
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $pwd = $_POST['pwd'];
-        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
         $email = $_POST['email'];
-        $q = $this->bdd->prepare("SELECT id FROM status WHERE status = 1");
-        $q->execute();
-        $status_id = $q->fetch();
-        $status_id = intval($status_id['id']);
-        $suspend = 0;
+        $exist = $this->bdd->prepare("SELECT email FROM email WHERE email=:email ");
+        $exist->bindValue(':email',$email,PDO::PARAM_STR);
+        $exist->execute();
+        $allreadyExist = $exist->fetch();
+        $allreadyExist = $allreadyExist['email'];
+        if($allreadyExist !== $email)
+        {
+            $firstname = $_POST['firstname'];
+            $lastname = $_POST['lastname'];
+            $pwd = $_POST['pwd'];
+            $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+            $q = $this->bdd->prepare("SELECT id FROM status WHERE status = 1");
+            $q->execute();
+            $status_id = $q->fetch();
+            $status_id = intval($status_id['id']);
+            $suspend = 0;
 
-        $query = $this->bdd->prepare("SELECT id FROM role WHERE role = 'user'");
-        $query->execute();
-        $role_id = $query->fetch();
-        $role_id = intval($role_id['id']);
-        $date_register = date("Y-m-d H:i:s");
-        $req = $this->bdd->prepare("INSERT INTO user (role_id, firstname, lastname, pwd, status_id, date_register) VALUES (:role_id ,:firstname, :lastname, :pwd, :status_id, :date_register)");
-        $req->execute(array(
-            ':role_id'=>$role_id,
-            ':firstname'=>$firstname,
-            ':lastname'=>$lastname,
-            ':pwd'=>$pwd,
-            ':status_id'=>$status_id,
-            ':date_register'=>$date_register
-        ));
+            $query = $this->bdd->prepare("SELECT id FROM role WHERE role = 'user'");
+            $query->execute();
+            $role_id = $query->fetch();
+            $role_id = intval($role_id['id']);
+            $date_register = date("Y-m-d H:i:s");
+            $req = $this->bdd->prepare("INSERT INTO user (role_id, firstname, lastname, pwd, status_id, date_register) VALUES (:role_id ,:firstname, :lastname, :pwd, :status_id, :date_register)");
+            $req->execute(array(
+                ':role_id'=>$role_id,
+                ':firstname'=>$firstname,
+                ':lastname'=>$lastname,
+                ':pwd'=>$pwd,
+                ':status_id'=>$status_id,
+                ':date_register'=>$date_register
+            ));
 
-        $user_id = $this->bdd->lastInsertId();
-        $req = $this->bdd->prepare("INSERT INTO email (user_id, email, suspend) VALUES (:user_id, :email, :suspend)");
-        $req->execute(array(
-            ':user_id'=>$user_id,
-            ':email'=>$email,
-            ':suspend'=>$suspend
-        ));
+            $user_id = $this->bdd->lastInsertId();
+            $token = mt_rand(100000, 999999);
+            $req = $this->bdd->prepare("INSERT INTO email (user_id, email, suspend, token) VALUES (:user_id, :email, :suspend, :token)");
+            $req->execute(array(
+                ':user_id'=>$user_id,
+                ':email'=>$email,
+                ':suspend'=>$suspend,
+                ':token'=>$token
+            ));
+            return $token;
+
+        }
+        else{
+            $token = 'AccountAlreadyExists';
+            return $token;
+        }
+
     }
 
     /*
@@ -206,6 +244,25 @@ class User
         $req->bindValue(':id',$id,PDO::PARAM_INT);
         $req->execute();
         return $req->fetchAll();
+    }
+
+    /*
+     * get data for suspend an user
+     */
+    public function confirmMail()
+    {
+        $email = $_POST['email'];
+        $token = $_POST['token'];
+        $req = $this->bdd->prepare("SELECT user_id FROM email WHERE email=:email AND token=:token");
+        $req->bindValue(':email',$email,PDO::PARAM_STR);
+        $req->bindValue(':token',$token,PDO::PARAM_INT);
+        $req->execute();
+        $id = $req->fetch();
+        $id = intval($id['user_id']);
+        $req = $this->bdd->prepare("UPDATE user SET status_id =1 WHERE id =:id ");
+        $req->bindValue(':id',$id,PDO::PARAM_INT);
+        $req->execute();
+        return true;
     }
 
     /*

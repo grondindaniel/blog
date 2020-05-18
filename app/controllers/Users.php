@@ -69,9 +69,47 @@
             $lastname = $_POST['lastname'];
             $email = $_POST['email'];
             $pwd = $_POST['pwd'];
-            parent::model('User')->addUser($firstname, $lastname,$email, $pwd);
+            $token =  parent::model('User')->addUser($firstname, $lastname,$email, $pwd);
+            if($token !== 'AccountAlreadyExists')
+            {
+                $email = strip_tags(htmlspecialchars($_POST['email']));
+                $subject = "Inscription au blog proteiforme";
+                $message = "http://blog.proteiforme.fr/blog/Users/confirmMail/".$_POST['email'];
+                $body = "Vous avez demandé une inscription au blog\n\n"."Voici le lien de validation:\n\nLien d'activation:\n$message". "\n\n Voici le code d'activation:\n\nCode:\n$token";
+                $header = "From: blog.proteiforme.fr\n";
+                $header .= "Reply-To: $email";
+                mail($email,$subject,$body,$header);
+                $twig = parent::twig();
+                echo $twig->render('mail\mail.twig', array('confirmMail'=>'ok'));
+            }
+            else
+            {
+                $twig = parent::twig();
+                echo $twig->render('mail\mail.twig', array('AccountAlreadyExists'=>'ok'));
+            }
+
+        }
+
+        /*
+        * check token and email
+        */
+        public function confirmMailMethod()
+        {
+            $email = $_POST['email'];
+            $token = $_POST['token'];
+            $token =  parent::model('User')->confirmMail($email, $token);
             $twig = parent::twig();
-            echo $twig->render('user\register.twig', array('enregistrement'=>'ok'));
+            echo $twig->render('mail\mail.twig', array('confirmCompte'=>$token));
+        }
+
+        /*
+         * page to receave the token
+         */
+        public function confirmMail($d)
+        {
+            $email = $d[2];
+            $twig = parent::twig();
+            echo $twig->render('user\confirmMail.twig', array('email'=>$email));
         }
 
 
@@ -103,6 +141,11 @@
             {
                 $_SESSION['active'] = true;
                 echo $twig->render('user\index.twig', array('role'=>$_SESSION['role'], 'active'=>$_SESSION['active']));
+            }
+            elseif ($data['valid'] === false && $data['role'] != '2')
+            {
+                session_destroy();
+                echo $twig->render('admin\login.twig', array('msg'=>'noAccount'));
             }
             elseif ($data['valid'] === false)
             {
@@ -164,6 +207,16 @@
         }
 
         /*
+ * Access to change pwd page
+ */
+        public function changePwdMailing($d)
+        {
+            $email = $d[2];
+            $twig = parent::twig();
+            echo $twig->render('admin\changePwdMailing.twig', array('email'=>$email));
+        }
+
+        /*
          * Access to change pwd page
          */
         public function updatePwd()
@@ -174,6 +227,17 @@
             parent::model('User')->updatePwd($id, $pwd);
         }
 
+        /*
+         * Access to change pwd page
+         */
+        public function updatePwdMailing()
+        {
+            $email = $_POST['email'];
+            $pwd = $_POST['pwd'];
+            parent::model('User')->updatePwdMailing($email, $pwd);
+            $twig = parent::twig();
+            echo $twig->render('mail\mail.twig', array('msg'=>'changePwdByMail'));
+        }
 
         /*
          * Edit identity
@@ -335,22 +399,23 @@
         {
             $email = $_POST['email'];
             $d = parent::model('User')->chekedEmail($email);
-
-            if($d['email'] == $email)
+            if($d['email'] === $_POST['email'])
             {
-                $from = $email;
                 $to = $email;
                 $subject = "Modification mot de passe";
-                $message = "PHP mail marche";
-                $headers = "From:" . $from;
-                mail($to,$subject,$message, $headers);
+                $message = "http://blog.proteiforme.fr/blog/Users/changePwdMailing/".$_POST['email'];
+                $body = "Vous avez demandé le lien pour modifier votre mot de passe.\n\n"."Voici le lien:\n\nLien pour modifier le mot de passe:\n$message";
+                $header = "From: blog.proteiforme.fr\n";
+                $header .= "Reply-To: $email";
+                mail($to,$subject,$body,$header);
                 $twig = parent::twig();
-                echo $twig->render('user\sendMessage.twig',array('message'=>'valid'));
+                echo $twig->render('mail\mail.twig',array('msg'=>'mailSend'));
+
             }
             else
             {
                 $twig = parent::twig();
-                echo $twig->render('user\sendMessage.twig',array('message'=>'invalid'));
+                echo $twig->render('user\sendMessage.twig',array('message'=>'invalid','emailSend'=>$d['email']));
             }
         }
 
