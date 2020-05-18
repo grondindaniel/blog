@@ -19,11 +19,12 @@
                 <input type="password" placeholder="Confirmer le mot de passe" id="pwd_verif" name="pwd" required>
                 <div class="row">
                     <div class="col-md-4">
-                        <button type="submit" style="background-color: #51A691;">S'inscrire</button>
-                    </div>
-                    <div class="col-md-4">
                         <div class="g-recaptcha" data-sitekey="6LeAnC0UAAAAAGB-hJ7RGLu7p1T-llZpN3_x4494"></div>
                     </div>
+                    <div class="col-md-4">
+                        <button type="submit" style="background-color: #51A691;">S'inscrire</button>
+                    </div>
+
                 </div>
                 {% if enregistrement == 'ok' %}
                     <div class="alert alert-success">
