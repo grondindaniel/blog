@@ -55,14 +55,21 @@
         <p class="masthead-subheading font-weight-light mb-0">Ecoute, qualité, sécurité <img src="https://insight.symfony.com/projects/e53f3e23-6136-428f-8c8c-d3555dd44320/big.svg"></p>
     </div>
 </header>
-
-<script>
-
-    swal("Merci", "Je vous contacterai très prochainement", "success").then(function() {
-        window.location = "../";
-    });
-</script>
-
+{% if contact == 'ok' %}
+<script>swal("Merci", "Je vous contacterai très prochainement{{ token }}", "success").then(function() {window.location = "../";});</script>
+{% elseif msg == 'mailSend' %}
+      <script>swal("Un mail vous a été envoyé.", "Merci de consulter votre boite de réception", "success").then(function() {window.location = "../";});</script>
+    {% elseif msg == 'changePwdByMail' %}
+      <script>swal("Votre mot de passe est modifié", "Vous pouvez maintenant vous connecter", "success").then(function() {window.location = "../";});</script>
+    {% elseif confirmMail == 'ok' %}
+      <script>swal("Un mail vous a été envoyé", "Vous y trouverez un code d'activation ainsi qu'un lien pour l'activation", "success").then(function() {window.location = "../";});</script>
+    {% elseif AccountAlreadyExists == 'ok' %}
+    <script>swal("Ce compte existe déjà", "Merci de vous connecter", "error").then(function() {window.location = "../";});</script>
+    {% elseif confirmCompte == true %}
+      <script>swal("Merci pour votre inscription", "Vous pouvez maintenant faire des commentaires sur le blog en vous connectant", "success").then(function() {window.location = "../";});</script>
+    {% elseif confirmCompte == false %}
+      <script>swal("Echec d'activation", "Merci de saisir de nouveau le code d'activation en cliquant sur le lien d'activation", "error").then(function() {window.location = "../";});</script>
+{% endif %}
 
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
