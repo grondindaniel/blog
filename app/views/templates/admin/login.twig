@@ -21,6 +21,12 @@
                     <p>Mot de passe oublié ?<strong> <a href="../Users/passwordForgot"> Cliquez ici </a></strong></p>
                 </div>
             {% endif %}
+            {% if msg == 'noAccount' %}
+                <div class="alert alert-info">
+                    <strong>Aucun compte n'a été trouvé </strong>
+                    <p>Merci d'en créer un pour commenter les posts<strong> </strong></p>
+                </div>
+            {% endif %}
             {% if status == 'error' %}
                 <div class="alert alert-warning">
                     <strong>Votre compte n'est pas encore validé ! </strong> Validation sous 24 heures.
