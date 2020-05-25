@@ -10463,7 +10463,10 @@ ul {
   width: 90%;
   margin: auto;
 }
+iframe{
+  max-width:100%;
 
+}
 @media only screen and (max-width: 380px) {
 
   .form-group {
