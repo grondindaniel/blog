@@ -7,10 +7,10 @@
 
 class User
 {
-    public $host = 'proteifotf581.mysql.db';
-    public $dbname = 'proteifotf581';
-    public $user = 'proteifotf581';
-    public $pwd = 'Xkeyscore1977';
+    public $host = 'localhost';
+    public $dbname = 'blog';
+    public $user = 'root';
+    public $pwd = '';
     public $bdd;
 
     public function __construct()
